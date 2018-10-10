@@ -34,3 +34,18 @@ These two controls can be used for start:
 You can see a detailed overview in this prezi-presentation that I held 2017 at sitwdf:
 http://prezi.com/rhil_uifj7rn/?utm_campaign=share&utm_medium=copy
 
+# features
+
+## prototyping
+With guidrasil you can prototype an application as easy as never before. You just need to click the controls you want and save the project.
+
+## code creation
+As every object in its shell knows what to do to display the control, it can provide the code for creation. The guidrasil manager class knows where the containers are placed and which controls are in there. So you can generate a complete genuine ABAP program for displaying these controls.
+
+## object manager
+The application provides a GUI for you to select all the containers and controls. But the application can display all controls also without the drop down functions. And the manager also knows the names of the controls. So you are able to just create the project with the manager class and then get the reference of objects by their names. Afterwards you can manipulate the object in the way you are used to it.
+
+## visualize settings
+All the settings of a control can be customized. For example you can set the attribute "hide statusbar" in the TextEditControl via listbox. At least you could define the complete fieldcatalog of an alv grid in the dialog.  
+
+
