@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_INTF" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <VSEOINTERF>
+    <CLSNAME>ZIF_GUIDRASIL_FUNC_RECEIVER</CLSNAME>
+    <VERSION>1</VERSION>
+    <LANGU>E</LANGU>
+    <DESCRIPT>Funktionsempfänger</DESCRIPT>
+    <EXPOSURE>2</EXPOSURE>
+    <STATE>1</STATE>
+    <UNICODE>X</UNICODE>
+   </VSEOINTERF>
+   <DESCRIPTIONS>
+    <SEOCOMPOTX>
+     <CLSNAME>ZIF_GUIDRASIL_FUNC_RECEIVER</CLSNAME>
+     <CMPNAME>DROPDOWN_CLICKED</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Dropdown geklickt</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZIF_GUIDRASIL_FUNC_RECEIVER</CLSNAME>
+     <CMPNAME>FUNCTION_SELECTED</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Funktion wurde ausgeführt</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZIF_GUIDRASIL_FUNC_RECEIVER</CLSNAME>
+     <CMPNAME>ON_DROPDOWN_CLICKED</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Empfänger für Dropdownmenu</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZIF_GUIDRASIL_FUNC_RECEIVER</CLSNAME>
+     <CMPNAME>ON_FUNCTION_SELECTED</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Empfänger für Funktion</DESCRIPT>
+    </SEOCOMPOTX>
+   </DESCRIPTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

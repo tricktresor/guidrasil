@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_CLAS" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <VSEOCLASS>
+    <CLSNAME>ZCL_GUIDRASIL_CONTROL_TEXT</CLSNAME>
+    <VERSION>1</VERSION>
+    <LANGU>E</LANGU>
+    <DESCRIPT>guidrasil Control &quot;Textedit&quot;</DESCRIPT>
+    <EXPOSURE>2</EXPOSURE>
+    <STATE>1</STATE>
+    <CLSFINAL>X</CLSFINAL>
+    <CLSCCINCL>X</CLSCCINCL>
+    <FIXPT>X</FIXPT>
+    <UNICODE>X</UNICODE>
+   </VSEOCLASS>
+   <DESCRIPTIONS>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_GUIDRASIL_CONTROL_TEXT</CLSNAME>
+     <CMPNAME>C_FUNCTION_READONLY</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Function switch Readonly</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_GUIDRASIL_CONTROL_TEXT</CLSNAME>
+     <CMPNAME>C_FUNCTION_STATUSBAR</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Funktionscode</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_GUIDRASIL_CONTROL_TEXT</CLSNAME>
+     <CMPNAME>C_FUNCTION_TOOLBAR</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Toolbar?</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_GUIDRASIL_CONTROL_TEXT</CLSNAME>
+     <CMPNAME>GS_SETTINGS</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Einstellungen zum Edit-Control</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_GUIDRASIL_CONTROL_TEXT</CLSNAME>
+     <CMPNAME>MR_TEXT</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>SAP TextEdit Control</DESCRIPT>
+    </SEOCOMPOTX>
+   </DESCRIPTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

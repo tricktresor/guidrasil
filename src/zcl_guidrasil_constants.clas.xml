@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_CLAS" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <VSEOCLASS>
+    <CLSNAME>ZCL_GUIDRASIL_CONSTANTS</CLSNAME>
+    <VERSION>1</VERSION>
+    <LANGU>E</LANGU>
+    <DESCRIPT>ENHEMA Konstanten</DESCRIPT>
+    <EXPOSURE>2</EXPOSURE>
+    <STATE>1</STATE>
+    <CLSFINAL>X</CLSFINAL>
+    <CLSCCINCL>X</CLSCCINCL>
+    <FIXPT>X</FIXPT>
+    <UNICODE>X</UNICODE>
+   </VSEOCLASS>
+   <DESCRIPTIONS>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_GUIDRASIL_CONSTANTS</CLSNAME>
+     <CMPNAME>DESIGN_CONTAINER_HEIGHT_HIGH</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Höhe Toolbar HighResolution</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_GUIDRASIL_CONSTANTS</CLSNAME>
+     <CMPNAME>DESIGN_CONTAINER_HEIGHT_LOW</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Höhe Toolbar LowResolution</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_GUIDRASIL_CONSTANTS</CLSNAME>
+     <CMPNAME>ICON_CONTAINER</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Iconname für Menü &quot;Container&quot;</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_GUIDRASIL_CONSTANTS</CLSNAME>
+     <CMPNAME>ICON_CONTROL</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Iconname für Menü &quot;Control&quot;</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_GUIDRASIL_CONSTANTS</CLSNAME>
+     <CMPNAME>SET_DESIGN_CONTAINER_HEIGHT</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Setzen der Höher der Toolbar</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_GUIDRASIL_CONSTANTS</CLSNAME>
+     <CMPNAME>SET_DESIGN_CONTAINER_HIGH_RES</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Setzen der Höher der Toolbar auf &quot;groß&quot;</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_GUIDRASIL_CONSTANTS</CLSNAME>
+     <CMPNAME>SET_DESIGN_CONTAINER_LOW_RES</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Setzen der Höher der Toolbar auf &quot;klein&quot;</DESCRIPT>
+    </SEOCOMPOTX>
+   </DESCRIPTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

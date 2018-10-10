@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_INTF" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <VSEOINTERF>
+    <CLSNAME>ZIF_GUIDRASIL_CONTROL_FUNC</CLSNAME>
+    <VERSION>1</VERSION>
+    <LANGU>E</LANGU>
+    <DESCRIPT>guidrasil Interface Control Functions</DESCRIPT>
+    <EXPOSURE>2</EXPOSURE>
+    <STATE>1</STATE>
+    <UNICODE>X</UNICODE>
+   </VSEOINTERF>
+   <DESCRIPTIONS>
+    <SEOCOMPOTX>
+     <CLSNAME>ZIF_GUIDRASIL_CONTROL_FUNC</CLSNAME>
+     <CMPNAME>GET_DESIGN_FUNCTIONS</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Return function code + description for function</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZIF_GUIDRASIL_CONTROL_FUNC</CLSNAME>
+     <CMPNAME>MR_ENHEMA_CONTROL</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>guidrasil Designer Base class</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZIF_GUIDRASIL_CONTROL_FUNC</CLSNAME>
+     <CMPNAME>ON_DROPDOWN_SELECTED</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>React on menu dropdown of control</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZIF_GUIDRASIL_CONTROL_FUNC</CLSNAME>
+     <CMPNAME>ON_FUNCTION_SELECTED</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>React on functioncode</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZIF_GUIDRASIL_CONTROL_FUNC</CLSNAME>
+     <CMPNAME>SAVE</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Save data</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZIF_GUIDRASIL_CONTROL_FUNC</CLSNAME>
+     <CMPNAME>SET_CONTROL</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Aktuelles Control setzen</DESCRIPT>
+    </SEOCOMPOTX>
+   </DESCRIPTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>
