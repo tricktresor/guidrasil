@@ -7,7 +7,7 @@ CLASS zcl_guidrasil_tree_display DEFINITION
 
     METHODS constructor
       IMPORTING
-        !id TYPE /inw/enhema_project .
+      !ID type ZGUIDRASIL_PROJECT .
     METHODS read .
     METHODS display .
   PROTECTED SECTION.
@@ -18,7 +18,7 @@ CLASS zcl_guidrasil_tree_display DEFINITION
     DATA mr_tree TYPE REF TO cl_gui_list_tree .
     DATA mt_nodes TYPE treev_ntab .
     DATA mt_items TYPE gui_item .
-    DATA mt_guids TYPE prp_tt_guid .
+    DATA mt_guids TYPE zguidrasil_tt_guid .
 
     METHODS tree_add_container
       IMPORTING

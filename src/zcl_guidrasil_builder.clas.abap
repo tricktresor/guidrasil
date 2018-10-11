@@ -12,7 +12,7 @@ CLASS zcl_guidrasil_builder DEFINITION
 
     INTERFACES zif_guidrasil_func_receiver .
 
-    CONSTANTS icon_container TYPE icon_name VALUE icon_wd_view_container ##NO_TEXT.
+    CONSTANTS icon_container TYPE zguidrasil_icon_name  VALUE icon_wd_view_container ##NO_TEXT.
     CONSTANTS k_mode_design TYPE char01 VALUE 'D' ##NO_TEXT.
     CONSTANTS k_mode_pattern TYPE char01 VALUE 'P' ##NO_TEXT.
 
