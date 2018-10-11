@@ -11,7 +11,7 @@ DATA gr_builder TYPE REF TO zcl_guidrasil_builder.
 
 
 PARAMETERS:
-  p_name   LIKE /inw/enhema-report MEMORY ID zguidrasil_project,
+  p_name   TYPE zguidrasil_project MEMORY ID zguidrasil_project,
   p_design TYPE c RADIOBUTTON GROUP mode DEFAULT 'X',
   p_view   TYPE c RADIOBUTTON GROUP mode,
   p_pattrn TYPE c RADIOBUTTON GROUP mode,
