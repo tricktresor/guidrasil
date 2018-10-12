@@ -7,7 +7,7 @@
     <STATE>A</STATE>
     <VARCL>X</VARCL>
     <SUBC>1</SUBC>
-    <RLOAD>D</RLOAD>
+    <RLOAD>E</RLOAD>
     <FIXPT>X</FIXPT>
     <UCCHECK>X</UCCHECK>
    </PROGDIR>
@@ -430,50 +430,93 @@
      </RSMPE_ATRT>
     </DOC>
    </CUA>
+   <TPOOL>
+    <item>
+     <ID>R</ID>
+     <ENTRY>Guidrasil: Project Administration</ENTRY>
+     <LENGTH>33</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>P_DELETE</KEY>
+     <ENTRY>Delete project</ENTRY>
+     <LENGTH>22</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>P_DESIGN</KEY>
+     <ENTRY>Design mode</ENTRY>
+     <LENGTH>19</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>P_HIRES</KEY>
+     <ENTRY>use high resolution mode</ENTRY>
+     <LENGTH>32</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>P_NAME</KEY>
+     <ENTRY>Name of project</ENTRY>
+     <LENGTH>23</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>P_TREE</KEY>
+     <ENTRY>Hierarchical tree view</ENTRY>
+     <LENGTH>30</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>P_VIEW</KEY>
+     <ENTRY>View mode</ENTRY>
+     <LENGTH>17</LENGTH>
+    </item>
+   </TPOOL>
    <I18N_TPOOL>
     <item>
      <LANGUAGE>D</LANGUAGE>
      <TEXTPOOL>
       <item>
        <ID>R</ID>
-       <ENTRY>ENHEMA GUI-Designer</ENTRY>
-       <LENGTH>19</LENGTH>
+       <ENTRY>Guidrasil: Projektadministration</ENTRY>
+       <LENGTH>70</LENGTH>
       </item>
       <item>
        <ID>S</ID>
        <KEY>P_DELETE</KEY>
-       <ENTRY>Delete Project</ENTRY>
-       <LENGTH>22</LENGTH>
+       <ENTRY>Projekt löschen</ENTRY>
+       <LENGTH>23</LENGTH>
       </item>
       <item>
        <ID>S</ID>
        <KEY>P_DESIGN</KEY>
-       <ENTRY>Design Mode</ENTRY>
-       <LENGTH>20</LENGTH>
+       <ENTRY>Entwurfsmodus</ENTRY>
+       <LENGTH>21</LENGTH>
+      </item>
+      <item>
+       <ID>S</ID>
+       <KEY>P_HIRES</KEY>
+       <ENTRY>Modus für hohe Auflösung</ENTRY>
+       <LENGTH>32</LENGTH>
       </item>
       <item>
        <ID>S</ID>
        <KEY>P_NAME</KEY>
-       <ENTRY>Name Of Project</ENTRY>
+       <ENTRY>Projektname</ENTRY>
        <LENGTH>23</LENGTH>
-      </item>
-      <item>
-       <ID>S</ID>
-       <KEY>P_PATTRN</KEY>
-       <ENTRY>Pattern Selection</ENTRY>
-       <LENGTH>27</LENGTH>
       </item>
       <item>
        <ID>S</ID>
        <KEY>P_TREE</KEY>
-       <ENTRY>Hierarchical view</ENTRY>
-       <LENGTH>25</LENGTH>
+       <ENTRY>Hirarchische Baumdarstellung</ENTRY>
+       <LENGTH>36</LENGTH>
       </item>
       <item>
        <ID>S</ID>
        <KEY>P_VIEW</KEY>
-       <ENTRY>Preview Project</ENTRY>
-       <LENGTH>23</LENGTH>
+       <ENTRY>Vorschaumodus</ENTRY>
+       <LENGTH>21</LENGTH>
       </item>
      </TEXTPOOL>
     </item>

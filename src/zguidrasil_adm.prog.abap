@@ -1,7 +1,6 @@
 *&---------------------------------------------------------------------*
-*& Report  /INW/ENHEMA_TEST
+*& Report  ZGUIDRASIL_ADM
 *&---------------------------------------------------------------------*
-
 REPORT  zguidrasil_adm LINE-SIZE 200.
 
 DATA g_mode     TYPE char01.
@@ -14,7 +13,6 @@ PARAMETERS:
   p_name   TYPE zguidrasil_project MEMORY ID zguidrasil_project,
   p_design TYPE c RADIOBUTTON GROUP mode DEFAULT 'X',
   p_view   TYPE c RADIOBUTTON GROUP mode,
-  p_pattrn TYPE c RADIOBUTTON GROUP mode,
   p_tree   TYPE c RADIOBUTTON GROUP mode,
   p_delete TYPE c RADIOBUTTON GROUP mode.
 
@@ -33,8 +31,6 @@ START-OF-SELECTION.
       g_mode = space.
     WHEN p_design.
       g_mode = 'D'.
-    WHEN p_pattrn.
-      g_mode = 'P'.
     WHEN p_delete.
       PERFORM delete.
       STOP.
