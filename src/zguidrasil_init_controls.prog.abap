@@ -3,6 +3,7 @@ REPORT zguidrasil_init_controls.
 CONSTANTS c_type_container TYPE c LENGTH 1 VALUE 'C'.
 CONSTANTS c_type_control   TYPE c LENGTH 1 VALUE 'O'.
 
+PARAMETERS p_del  AS CHECKBOX DEFAULT space.
 PARAMETERS p_test AS CHECKBOX DEFAULT 'X'.
 
 START-OF-SELECTION.
@@ -14,8 +15,9 @@ FORM init.
   DATA(subclasses) = oo_class->get_subclasses( ).
   DATA controls TYPE STANDARD TABLE OF zguidrasil_ctls.
   DATA control  TYPE zguidrasil_ctls.
+  DATA seoclskey TYPE seoclskey.
 
-    DATA class                        TYPE vseoclass.
+  DATA class                        TYPE vseoclass.
 
 
   LOOP AT subclasses INTO DATA(subclass).
@@ -23,6 +25,7 @@ FORM init.
     SELECT SINGLE * FROM zguidrasil_ctls INTO control WHERE classname = subclass-clsname.
     CHECK sy-subrc > 0.
     control-classname = subclass-clsname.
+    seoclskey-clsname = subclass-clsname.
 
 
     CALL FUNCTION 'SEO_CLASS_GET'
@@ -74,6 +77,10 @@ FORM init.
   ENDLOOP.
 
   IF p_test = abap_false.
+    IF p_del = abap_true.
+      DELETE FROM zguidrasil_ctls WHERE usable = abap_true.
+    ENDIF.
+
     INSERT zguidrasil_ctls FROM TABLE controls.
   ENDIF.
 
