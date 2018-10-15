@@ -1,45 +1,45 @@
-class ZCL_GUIDRASIL_CONTROL_DIABOX definition
-  public
-  inheriting from ZCL_GUIDRASIL_CONTROL_BASE
-  final
-  create public .
+CLASS zcl_guidrasil_control_diabox DEFINITION
+  PUBLIC
+  INHERITING FROM zcl_guidrasil_control_base
+  FINAL
+  CREATE PUBLIC .
 
 *"* public components of class ZCL_GUIDRASIL_CONTROL_DIABOX
 *"* do not include other source files here!!!
-public section.
+  PUBLIC SECTION.
 
-  methods APPLY_SETTINGS
-    redefinition .
-  methods CREATE
-    redefinition .
-  methods GET_CONTAINER_FIRST
-    redefinition .
-  methods GET_CONTAINER_LIST
-    redefinition .
-  methods GET_CONTAINER_NAME
-    redefinition .
-  methods LOAD_SETTINGS
-    redefinition .
-  methods PROVIDE_CONTROL_NAME
-    redefinition .
-  methods PROVIDE_TOOLBAR
-    redefinition .
-  methods RETURN_CREATION_CODE
-    redefinition .
-  methods SAVE_SETTINGS
-    redefinition .
-protected section.
+    METHODS apply_settings
+        REDEFINITION .
+    METHODS create
+        REDEFINITION .
+    METHODS get_container_first
+        REDEFINITION .
+    METHODS get_container_list
+        REDEFINITION .
+    METHODS get_container_name
+        REDEFINITION .
+    METHODS load_settings
+        REDEFINITION .
+    METHODS provide_control_name
+        REDEFINITION .
+    METHODS provide_toolbar
+        REDEFINITION .
+    METHODS return_creation_code
+        REDEFINITION .
+    METHODS save_settings
+        REDEFINITION .
+  PROTECTED SECTION.
 *"* protected components of class ZCL_GUIDRASIL_CONTROL_DIABOX
 *"* do not include other source files here!!!
 
-  methods DIALOGBOX_CLOSE
-    for event CLOSE of CL_GUI_DIALOGBOX_CONTAINER .
-private section.
+    METHODS dialogbox_close
+        FOR EVENT close OF cl_gui_dialogbox_container .
+  PRIVATE SECTION.
 *"* private components of class ZCL_GUIDRASIL_CONTROL_DIABOX
 *"* do not include other source files here!!!
 
-  data GS_SETTINGS type /INW/S_ENHEMA_SETTING_DIABOX .
-  data MR_DIALOGBOX type ref to CL_GUI_DIALOGBOX_CONTAINER .
+    DATA gs_settings TYPE zguidrasil_setting_diabox .
+    DATA mr_dialogbox TYPE REF TO cl_gui_dialogbox_container .
 ENDCLASS.
 
 
@@ -47,58 +47,58 @@ ENDCLASS.
 CLASS ZCL_GUIDRASIL_CONTROL_DIABOX IMPLEMENTATION.
 
 
-METHOD APPLY_SETTINGS.
+  METHOD apply_settings.
 
-  super->apply_settings( ).
+    super->apply_settings( ).
 
-  mr_dialogbox->set_height( gs_settings-height ).
-  mr_dialogbox->set_width( gs_settings-width ).
-  mr_dialogbox->set_left( gs_settings-pos_x ).
-  mr_dialogbox->set_top( gs_settings-pos_y ).
+    mr_dialogbox->set_height( gs_settings-height ).
+    mr_dialogbox->set_width( gs_settings-width ).
+    mr_dialogbox->set_left( gs_settings-pos_x ).
+    mr_dialogbox->set_top( gs_settings-pos_y ).
 *
 *  mr_docking_container->set_extension( extension = gs_settings-extension ).
 
-ENDMETHOD.
+  ENDMETHOD.
 
 
-METHOD CREATE.
+  METHOD create.
 
 
-  IF iv_name IS INITIAL.
-    gv_control_name = /inw/enhema_builder=>init_control_name( 'DIALOGBOX' ).
-  ELSE.
-    gv_control_name = iv_name.
-  ENDIF.
+    IF iv_name IS INITIAL.
+      gv_control_name = zcl_guidrasil_builder=>init_control_name( 'DIALOGBOX' ).
+    ELSE.
+      gv_control_name = iv_name.
+    ENDIF.
 
 *  gv_control_name = |Diabox_{ gv_control_name }|.
 
-  mv_parent_container_name = iv_parent.
+    mv_parent_container_name = iv_parent.
 
-  IF gs_settings IS INITIAL.
-    gs_settings-width  = 500.
-    gs_settings-height = 300.
-    gs_settings-pos_y  =  50.
-    gs_settings-pos_x  = 150.
-  ENDIF.
+    IF gs_settings IS INITIAL.
+      gs_settings-width  = 500.
+      gs_settings-height = 300.
+      gs_settings-pos_y  =  50.
+      gs_settings-pos_x  = 150.
+    ENDIF.
 
-  CREATE OBJECT mr_dialogbox
-    EXPORTING
-      parent  = ir_parent
-      width   = gs_settings-width
-      height  = gs_settings-height
-      top     = gs_settings-pos_y
-      left    = gs_settings-pos_x
-      caption = gv_control_name.
-  mr_dialogbox->set_name( |{ gv_control_name }| ).
+    CREATE OBJECT mr_dialogbox
+      EXPORTING
+        parent  = ir_parent
+        width   = gs_settings-width
+        height  = gs_settings-height
+        top     = gs_settings-pos_y
+        left    = gs_settings-pos_x
+        caption = gv_control_name.
+    mr_dialogbox->set_name( |{ gv_control_name }| ).
 
-  SET HANDLER dialogbox_close FOR mr_dialogbox.
+    SET HANDLER dialogbox_close FOR mr_dialogbox.
 
-  gr_control = mr_dialogbox.
+    gr_control = mr_dialogbox.
 
-ENDMETHOD.
+  ENDMETHOD.
 
 
-  METHOD DIALOGBOX_CLOSE.
+  METHOD dialogbox_close.
 
     IF mr_dialogbox IS BOUND.
       mr_dialogbox->set_visible( space ).
@@ -107,14 +107,14 @@ ENDMETHOD.
   ENDMETHOD.
 
 
-  METHOD GET_CONTAINER_FIRST.
+  METHOD get_container_first.
 
     er_first_container ?= gr_control.
 
   ENDMETHOD.
 
 
-  METHOD GET_CONTAINER_LIST.
+  METHOD get_container_list.
 
     DATA lr_container TYPE REF TO cl_gui_container.
     lr_container ?= gr_control.
@@ -123,31 +123,31 @@ ENDMETHOD.
   ENDMETHOD.
 
 
-  METHOD GET_CONTAINER_NAME.
+  METHOD get_container_name.
 
     ev_container_name = gr_control->get_name( ).
 
   ENDMETHOD.
 
 
-METHOD LOAD_SETTINGS.
+  METHOD load_settings.
 
-  CALL METHOD load
-    CHANGING
-      cs_settings = gs_settings.
+    CALL METHOD load
+      CHANGING
+        cs_settings = gs_settings.
 
-ENDMETHOD.
-
-
-  method PROVIDE_CONTROL_NAME.
-  endmethod.
+  ENDMETHOD.
 
 
-  method PROVIDE_TOOLBAR.
-  endmethod.
+  METHOD provide_control_name.
+  ENDMETHOD.
 
 
-METHOD RETURN_CREATION_CODE.
+  METHOD provide_toolbar.
+  ENDMETHOD.
+
+
+  METHOD return_creation_code.
 
 
 *  APPEND '$control TYPE REF TO cl_gui_dialogbox_container.' TO data.
@@ -164,10 +164,10 @@ METHOD RETURN_CREATION_CODE.
 *      left    = gs_settings-pos_x
 *      caption = gv_control_name.
 
-ENDMETHOD.
+  ENDMETHOD.
 
 
-  METHOD SAVE_SETTINGS.
+  METHOD save_settings.
 
     DATA:
       lr_docking        TYPE REF TO cl_gui_docking_container.

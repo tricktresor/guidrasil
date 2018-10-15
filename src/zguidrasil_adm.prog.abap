@@ -69,7 +69,7 @@ FORM delete.
 *== delete settings
     WRITE: / 'Lösche Objekte für Projekt', p_name.
     LOOP AT lt_objects ASSIGNING <object>.
-      DELETE FROM /inw/enhema_set WHERE guid = <object>-object_guid.
+      DELETE FROM zguidrasil_set WHERE guid = <object>-object_guid.
       IF sy-subrc = 0.
         WRITE: / 'Einstellungen für Objekt', <object>-control_name, 'gelöscht.'.
       ELSE.
@@ -91,7 +91,7 @@ MODULE status_0001 OUTPUT.
 
   CASE g_mode.
     WHEN 'D'.
-      SET PF-STATUS 'ENHEMA'.
+      SET PF-STATUS 'GUIDRASIL'.
     WHEN space.
       IF lt_excl IS INITIAL.
         APPEND 'SAVE' TO lt_excl.
@@ -103,9 +103,9 @@ MODULE status_0001 OUTPUT.
         APPEND 'DIALOGBOX' TO lt_excl.
 *        APPEND 'GET_PATTERN' TO lt_excl.
       ENDIF.
-      SET PF-STATUS 'ENHEMA' EXCLUDING lt_excl.
+      SET PF-STATUS 'GUIDRASIL' EXCLUDING lt_excl.
     WHEN OTHERS.
-      SET PF-STATUS 'ENHEMA' EXCLUDING 'SAVE'.
+      SET PF-STATUS 'GUIDRASIL' EXCLUDING 'SAVE'.
   ENDCASE.
 
   IF gr_builder IS NOT BOUND.

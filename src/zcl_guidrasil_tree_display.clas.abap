@@ -184,7 +184,7 @@ CLASS ZCL_GUIDRASIL_TREE_DISPLAY IMPLEMENTATION.
 *  ENDIF.
     node-relatship = cl_gui_list_tree=>relat_last_child.
     SELECT SINGLE iconname
-      FROM /inw/enh_ctls
+      FROM zguidrasil_ctls
       INTO node-n_image
      WHERE classname = ctrl-object.
 

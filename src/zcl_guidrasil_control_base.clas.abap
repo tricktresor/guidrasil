@@ -1,155 +1,155 @@
-class ZCL_GUIDRASIL_CONTROL_BASE definition
-  public
-  abstract
-  create public .
+CLASS zcl_guidrasil_control_base DEFINITION
+  PUBLIC
+  ABSTRACT
+  CREATE PUBLIC .
 
 *"* public components of class ZCL_GUIDRASIL_CONTROL_BASE
 *"* do not include other source files here!!!
-public section.
-  type-pools ABAP .
-  type-pools ICON .
+  PUBLIC SECTION.
+    TYPE-POOLS abap .
+    TYPE-POOLS icon .
 
-  interfaces IF_SERIALIZABLE_OBJECT .
-  interfaces ZIF_GUIDRASIL_FUNC_RECEIVER .
+    INTERFACES if_serializable_object .
+    INTERFACES zif_guidrasil_func_receiver .
 
-  data GV_GUID type GUID_16 read-only .
-  data GV_CONTROL_NAME type TEXT30 .
-  data GR_CONTROL type ref to CL_GUI_CONTROL .
-  data GV_CONTROL_SHORT_NAME type STRING .
-  data GV_CONTROL_TECHNICAL type SEOCLSNAME .
-  data:
-    gt_events TYPE STANDARD TABLE OF string .
-  data MV_PARENT_CONTAINER_NAME type ZGUIDRASIL_CONTAINER_NAME .
+    DATA gv_guid TYPE guid_16 READ-ONLY .
+    DATA gv_control_name TYPE text30 .
+    DATA gr_control TYPE REF TO cl_gui_control .
+    DATA gv_control_short_name TYPE string .
+    DATA gv_control_technical TYPE seoclsname .
+    DATA:
+      gt_events TYPE STANDARD TABLE OF string .
+    DATA mv_parent_container_name TYPE zguidrasil_container_name .
 
-  class-methods GET_INSTANCE
-    importing
-      !IV_CLASSNAME type SEOCLSNAME
-      !IV_GUID type GUID_16 optional
-      !IR_PARENT_CONTAINER type ref to CL_GUI_CONTAINER optional
-      !IV_DONT_CREATE type XFELD optional
-      !IV_NAME type TEXT30 optional
-      !IV_CONTROL_ID type I
-      !IV_PARENT_CONTAINER type CLIKE optional
-    exporting
-      !ER_CONTROL type ref to ZCL_GUIDRASIL_CONTROL_BASE
-    exceptions
-      CONTROL_ERROR .
-  class-methods SET_ATTRIBUTE_EXT
-    importing
-      !ATTR type CLIKE
-      !VALUE type ANY
-    changing
-      !SETTINGS type ANY .
-  methods ADD_CHILD
-    importing
-      !IR_CONTROL type ref to ZCL_GUIDRASIL_CONTROL_BASE .
-  methods RETURN_CREATION_CODE
-    exporting
-      value(CODE) type STRING_TABLE
-      !DATA type STRING_TABLE
-    returning
-      value(NO_CODE) type BOOLEAN .
-  methods APPLY_SETTINGS .
-  methods CONSTRUCTOR .
-  methods CREATE
-    importing
-      !IR_PARENT type ref to CL_GUI_CONTAINER optional
-      !IV_NAME type STRING optional
-      !IV_CONTROL_ID type I
-      !IV_PARENT type CLIKE
-    exporting
-      !ER_CONTROL type ref to CL_GUI_CONTROL
-      !ERT_CONTAINER type CWB_CONTAINER
-    exceptions
-      CONTROL_ERROR .
-  methods DESTROY .
-  methods FUNCTION
-    importing
-      !IV_FUNCTION type C
-    exceptions
-      ERROR .
-  methods GET_CHILDREN
-    exporting
-      !ET_CONTROLS type ZGUIDRASIL_CONTROL_T
-      !ER_FIRST_CONTROL type ref to ZCL_GUIDRASIL_CONTROL_BASE .
-  methods GET_CONTAINER_XXX
-    exporting
-      !ER_FIRST_CONTAINER type ref to CL_GUI_CONTAINER
-      !ERT_CONTAINER type CWB_CONTAINER
-      !EV_CONTAINER_NAME type CLIKE .
-  methods GET_CONTROL
-    returning
-      value(OBJECT) type ref to CL_GUI_CONTROL .
-  methods GET_CONTROL_LIST
-    importing
-      !IR_PARENT_CONTROL type ref to ZCL_GUIDRASIL_CONTROL_BASE
-    changing
-      !CT_CONTROL_LIST type ZGUIDRASIL_CTL_HIERARCHY_T .
-  methods GET_DESIGN_FUNCTIONS
-    exporting
-      value(ET_FUNCTIONS) type TTB_BUTTON
-      value(ET_FUNCMENUS) type TTB_BTNMNU .
-  methods GET_PATTERN
-    returning
-      value(ET_PATTERN) type STRING_TABLE .
-  methods GET_SETTINGS_VALUE
-    importing
-      !ATTR type CLIKE
-    returning
-      value(VALUE) type STRING .
-  methods GET_SETTINGS_VAR
-    exporting
-      !ES_SETTINGS type ANY
-      !EV_NO_SETTINGS type XFELD .
-  methods HAS_PATTERN
-    returning
-      value(PATTERN_FLAG) type INTEGER .
-  methods INIT
-    exporting
-      !ER_CONTROL type ref to CL_GUI_OBJECT .
-  methods LOAD_SETTINGS .
-  methods PROVIDE_CONTROL_NAME
-  abstract
-    exporting
-      !EV_NAME type C
-      !EV_TEXT type C
-      !EV_DESC type C
-      !EV_ICON type ICON_D
-      !EV_SHORT type C
-    exceptions
-      REDEFINE .
-  methods PROVIDE_ENHEMA_OBJECT
-    exporting
-      !EV_ENHEMA_NAME type C
-    exceptions
-      REDEFINE .
-  methods PROVIDE_TOOLBAR
-  abstract
-    changing
-      !CR_TOOLBAR type ref to CL_GUI_TOOLBAR
-    exceptions
-      ERROR .
-  methods SAVE_ALL .
-  methods SAVE_SETTINGS .
-  methods SET_ATTRIBUTE
-    importing
-      !NAME type CLIKE
-      !VALUE type ANY .
-  methods SET_SETTINGS_VAR
-    importing
-      !IS_SETTINGS type ANY .
-  methods VIEW_ATTRIBUTES
-    importing
-      !IV_EDIT type C .
-  methods GET_CONTAINER_LIST
-    returning
-      value(ERT_CONTAINER) type CWB_CONTAINER .
-  methods GET_CONTAINER_NAME
-    returning
-      value(EV_CONTAINER_NAME) type STRING .
-  methods GET_CONTAINER_FIRST
-    returning
-      value(ER_FIRST_CONTAINER) type ref to CL_GUI_CONTAINER .
+    CLASS-METHODS get_instance
+      IMPORTING
+        !iv_classname        TYPE seoclsname
+        !iv_guid             TYPE guid_16 OPTIONAL
+        !ir_parent_container TYPE REF TO cl_gui_container OPTIONAL
+        !iv_dont_create      TYPE xfeld OPTIONAL
+        !iv_name             TYPE text30 OPTIONAL
+        !iv_control_id       TYPE i
+        !iv_parent_container TYPE clike OPTIONAL
+      EXPORTING
+        !er_control          TYPE REF TO zcl_guidrasil_control_base
+      EXCEPTIONS
+        control_error .
+    CLASS-METHODS set_attribute_ext
+      IMPORTING
+        !attr     TYPE clike
+        !value    TYPE any
+      CHANGING
+        !settings TYPE any .
+    METHODS add_child
+      IMPORTING
+        !ir_control TYPE REF TO zcl_guidrasil_control_base .
+    METHODS return_creation_code
+      EXPORTING
+        VALUE(code)    TYPE string_table
+        !data          TYPE string_table
+      RETURNING
+        VALUE(no_code) TYPE rm_boolean .
+    METHODS apply_settings .
+    METHODS constructor .
+    METHODS create
+      IMPORTING
+        !ir_parent     TYPE REF TO cl_gui_container OPTIONAL
+        !iv_name       TYPE string OPTIONAL
+        !iv_control_id TYPE i
+        !iv_parent     TYPE clike
+      EXPORTING
+        !er_control    TYPE REF TO cl_gui_control
+        !ert_container TYPE cwb_container
+      EXCEPTIONS
+        control_error .
+    METHODS destroy .
+    METHODS function
+      IMPORTING
+        !iv_function TYPE c
+      EXCEPTIONS
+        error .
+    METHODS get_children
+      EXPORTING
+        !et_controls      TYPE zguidrasil_control_t
+        !er_first_control TYPE REF TO zcl_guidrasil_control_base .
+    METHODS get_container_xxx
+      EXPORTING
+        !er_first_container TYPE REF TO cl_gui_container
+        !ert_container      TYPE cwb_container
+        !ev_container_name  TYPE clike .
+    METHODS get_control
+      RETURNING
+        VALUE(object) TYPE REF TO cl_gui_control .
+    METHODS get_control_list
+      IMPORTING
+        !ir_parent_control TYPE REF TO zcl_guidrasil_control_base
+      CHANGING
+        !ct_control_list   TYPE zguidrasil_ctl_hierarchy_t .
+    METHODS get_design_functions
+      EXPORTING
+        VALUE(et_functions) TYPE ttb_button
+        VALUE(et_funcmenus) TYPE ttb_btnmnu .
+    METHODS get_pattern
+      RETURNING
+        VALUE(et_pattern) TYPE string_table .
+    METHODS get_settings_value
+      IMPORTING
+        !attr        TYPE clike
+      RETURNING
+        VALUE(value) TYPE string .
+    METHODS get_settings_var
+      EXPORTING
+        !es_settings    TYPE any
+        !ev_no_settings TYPE xfeld .
+    METHODS has_pattern
+      RETURNING
+        VALUE(pattern_flag) TYPE integer .
+    METHODS init
+      EXPORTING
+        !er_control TYPE REF TO cl_gui_object .
+    METHODS load_settings .
+    METHODS provide_control_name
+          ABSTRACT
+      EXPORTING
+        !ev_name  TYPE c
+        !ev_text  TYPE c
+        !ev_desc  TYPE c
+        !ev_icon  TYPE icon_d
+        !ev_short TYPE c
+      EXCEPTIONS
+        redefine .
+    METHODS provide_enhema_object
+      EXPORTING
+        !ev_enhema_name TYPE c
+      EXCEPTIONS
+        redefine .
+    METHODS provide_toolbar
+          ABSTRACT
+      CHANGING
+        !cr_toolbar TYPE REF TO cl_gui_toolbar
+      EXCEPTIONS
+        error .
+    METHODS save_all .
+    METHODS save_settings .
+    METHODS set_attribute
+      IMPORTING
+        !name  TYPE clike
+        !value TYPE any .
+    METHODS set_settings_var
+      IMPORTING
+        !is_settings TYPE any .
+    METHODS view_attributes
+      IMPORTING
+        !iv_edit TYPE c .
+    METHODS get_container_list
+      RETURNING
+        VALUE(ert_container) TYPE cwb_container .
+    METHODS get_container_name
+      RETURNING
+        VALUE(ev_container_name) TYPE string .
+    METHODS get_container_first
+      RETURNING
+        VALUE(er_first_container) TYPE REF TO cl_gui_container .
   PROTECTED SECTION.
 *"* protected components of class ZCL_GUIDRASIL_CONTROL_BASE
 *"* do not include other source files here!!!

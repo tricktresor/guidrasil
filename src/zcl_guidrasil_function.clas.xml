@@ -13,14 +13,6 @@
     <FIXPT>X</FIXPT>
     <UNICODE>X</UNICODE>
    </VSEOCLASS>
-   <DESCRIPTIONS>
-    <SEOCOMPOTX>
-     <CLSNAME>ZCL_GUIDRASIL_FUNCTION</CLSNAME>
-     <CMPNAME>MR_ENHEMA_CONTROL</CMPNAME>
-     <LANGU>E</LANGU>
-     <DESCRIPT>ENHEMA Designer Base class</DESCRIPT>
-    </SEOCOMPOTX>
-   </DESCRIPTIONS>
   </asx:values>
  </asx:abap>
 </abapGit>
