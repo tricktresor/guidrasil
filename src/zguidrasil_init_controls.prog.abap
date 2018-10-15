@@ -15,12 +15,29 @@ FORM init.
   DATA controls TYPE STANDARD TABLE OF zguidrasil_ctls.
   DATA control  TYPE zguidrasil_ctls.
 
+    DATA class                        TYPE vseoclass.
+
 
   LOOP AT subclasses INTO DATA(subclass).
     CLEAR control.
     SELECT SINGLE * FROM zguidrasil_ctls INTO control WHERE classname = subclass-clsname.
     CHECK sy-subrc > 0.
     control-classname = subclass-clsname.
+
+
+    CALL FUNCTION 'SEO_CLASS_GET'
+      EXPORTING
+        clskey = subclass-clsname
+      IMPORTING
+        class  = class
+      EXCEPTIONS
+        OTHERS = 5.
+    IF sy-subrc = 0.
+      control-quickinfo = class-descript.
+    ELSE.
+      control-quickinfo = subclass-clsname.
+    ENDIF.
+
 
     CASE subclass-clsname.
       WHEN 'ZCL_GUIDRASIL_DESIGN_CONTAINER'.
