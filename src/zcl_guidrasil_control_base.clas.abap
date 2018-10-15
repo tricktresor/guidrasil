@@ -150,27 +150,27 @@ CLASS zcl_guidrasil_control_base DEFINITION
     METHODS get_container_first
       RETURNING
         VALUE(er_first_container) TYPE REF TO cl_gui_container .
-  PROTECTED SECTION.
+protected section.
+
 *"* protected components of class ZCL_GUIDRASIL_CONTROL_BASE
 *"* do not include other source files here!!!
+  class-data MR_RANDOM type ref to CL_ABAP_RANDOM_INT .
+  class-data MT_ALL_ICONS type TREEMICTAB .
+  data GT_CHILDREN type ZGUIDRASIL_CONTROL_T .
+  data GRT_CONTAINER type CWB_CONTAINER .
+  data GV_NO_SETTINGS type XFELD .
+  data MR_ITERATOR_OBJECTS_FUNC type ref to CL_OBJECT_COLLECTION .
+  data MR_CONTROL_FUNCTIONS type ref to ZCL_GUIDRASIL_FUNCTION .
+  data MT_CREATION_CODE type STRING_TABLE .
+  data MD_DATA type ref to DATA .
 
-    CLASS-DATA mr_random TYPE REF TO cl_abap_random_int .
-    CLASS-DATA mt_all_icons TYPE treemictab .
-    DATA gt_children TYPE zguidrasil_control_t .
-    DATA grt_container TYPE cwb_container .
-    DATA gv_no_settings TYPE xfeld .
-    DATA mr_iterator_objects_func TYPE REF TO cl_object_collection .
-    DATA mr_control_functions TYPE REF TO zcl_guidrasil_function .
-    DATA mt_creation_code TYPE string_table .
-    DATA md_data TYPE REF TO data .
-
-    METHODS init_enhema .
-    METHODS load
-      CHANGING
-        !cs_settings TYPE any OPTIONAL .
-    METHODS save
-      IMPORTING
-        !is_settings TYPE any .
+  methods INIT_GUIDRASIL .
+  methods LOAD
+    changing
+      !CS_SETTINGS type ANY optional .
+  methods SAVE
+    importing
+      !IS_SETTINGS type ANY .
   PRIVATE SECTION.
 *"* private components of class ZCL_GUIDRASIL_CONTROL_BASE
 *"* do not include other source files here!!!
@@ -320,7 +320,7 @@ CLASS ZCL_GUIDRASIL_CONTROL_BASE IMPLEMENTATION.
     ENDIF.
 
     CREATE OBJECT er_control TYPE (iv_classname).
-    er_control->init_enhema( ).
+    er_control->init_guidrasil( ).
 
 * eindeutige ID erzeugen, wenn nicht gesetzt
     IF iv_guid IS INITIAL.
@@ -394,11 +394,11 @@ CLASS ZCL_GUIDRASIL_CONTROL_BASE IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD init_enhema.
+  METHOD INIT_GUIDRASIL.
 
     CREATE OBJECT mr_control_functions
       EXPORTING
-        enhema_control = me.
+        guidrasil_control = me.
 
   ENDMETHOD.
 
