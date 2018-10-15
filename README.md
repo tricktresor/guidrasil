@@ -22,6 +22,11 @@ Each control can be created with a method CREATE. Inside this method everything 
 
 All controls have a defined structure for managing these attributes. But the attributes will be saved with one generic function using serialization.
 
+# start
+Start report ZGUIDRASIL_INI_CONTROLS to initialize the controls custom table.
+This report will add the existing control classes in table ZGUIDRASIL_CTLS where ZGUIDRASIL_ADM selects the usable controls and containers from.
+
+
 # controls
 this project starts with following containers:
 - docking container
