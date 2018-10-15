@@ -30,7 +30,7 @@ FORM init.
 
     CALL FUNCTION 'SEO_CLASS_GET'
       EXPORTING
-        clskey = subclass-clsname
+        clskey = seoclskey
       IMPORTING
         class  = class
       EXCEPTIONS
