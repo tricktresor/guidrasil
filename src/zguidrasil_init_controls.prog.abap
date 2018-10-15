@@ -19,6 +19,11 @@ FORM init.
 
   DATA class                        TYPE vseoclass.
 
+  IF p_test = abap_false
+  AND p_del = abap_true.
+    "Delete controls
+    DELETE FROM zguidrasil_ctls WHERE usable = abap_true.
+  ENDIF.
 
   LOOP AT subclasses INTO DATA(subclass).
     CLEAR control.
@@ -27,7 +32,7 @@ FORM init.
     control-classname = subclass-clsname.
     seoclskey-clsname = subclass-clsname.
 
-
+    "Get class name
     CALL FUNCTION 'SEO_CLASS_GET'
       EXPORTING
         clskey = seoclskey
@@ -77,11 +82,17 @@ FORM init.
   ENDLOOP.
 
   IF p_test = abap_false.
-    IF p_del = abap_true.
-      DELETE FROM zguidrasil_ctls WHERE usable = abap_true.
+    IF controls IS INITIAL.
+      WRITE: / 'no updates done'.
+    ELSE.
+      INSERT zguidrasil_ctls FROM TABLE controls.
+      IF sy-subrc = 0.
+        WRITE: / 'zguidrasil_ctls table updated'.
+      ELSE.
+        ROLLBACK WORK.
+        WRITE: / 'error updating zguidrasil_ctls'.
+      ENDIF.
     ENDIF.
-
-    INSERT zguidrasil_ctls FROM TABLE controls.
   ENDIF.
 
 ENDFORM.

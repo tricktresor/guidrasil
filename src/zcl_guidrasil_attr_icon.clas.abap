@@ -6,7 +6,7 @@ class ZCL_GUIDRASIL_ATTR_ICON definition
 
 public section.
 
-  data ICON_NAME type ICON_NAME .
+  data ICON_NAME type ICONNAME .
   data DISPLAY_MODE type I .
 protected section.
 private section.

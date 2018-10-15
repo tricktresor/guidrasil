@@ -54,7 +54,7 @@ private section.
 
   class-methods GET_RANDOM_ICON
     returning
-      value(ICON_NAME) type ICON_NAME .
+      value(ICON_NAME) type ICONNAME .
   methods ICON_CLICK
     for event PICTURE_CLICK of CL_GUI_PICTURE
     importing
