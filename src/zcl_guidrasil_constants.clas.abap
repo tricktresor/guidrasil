@@ -6,8 +6,8 @@ class ZCL_GUIDRASIL_CONSTANTS definition
 public section.
 
   class-data DESIGN_CONTAINER_HEIGHT type I value 50 ##NO_TEXT.
-    CLASS-DATA icon_container TYPE zguidrasil_icon_name READ-ONLY VALUE icon_wd_view_container ##NO_TEXT.
-    CLASS-DATA icon_control TYPE zguidrasil_icon_name READ-ONLY VALUE cntb_btype_dropdown ##NO_TEXT.
+  class-data ICON_CONTAINER type ZGUIDRASIL_ICON_NAME read-only value ICON_WD_VIEW_CONTAINER ##NO_TEXT.
+  class-data ICON_CONTROL type ZGUIDRASIL_ICON_NAME read-only value CNTB_BTYPE_DROPDOWN ##NO_TEXT.
   class-data DESIGN_CONTAINER_HEIGHT_LOW type I read-only value 25 ##NO_TEXT.
   class-data DESIGN_CONTAINER_HEIGHT_HIGH type I read-only value 50 ##NO_TEXT.
 

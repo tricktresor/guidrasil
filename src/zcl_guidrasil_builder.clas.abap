@@ -1,55 +1,55 @@
-CLASS zcl_guidrasil_builder DEFINITION
-  PUBLIC
-  FINAL
-  CREATE PUBLIC .
+class ZCL_GUIDRASIL_BUILDER definition
+  public
+  final
+  create public .
 
 *"* public components of class ZCL_GUIDRASIL_BUILDER
 *"* do not include other source files here!!!
-  PUBLIC SECTION.
-    TYPE-POOLS abap .
-    TYPE-POOLS cntb .
-    TYPE-POOLS icon .
+public section.
+  type-pools ABAP .
+  type-pools CNTB .
+  type-pools ICON .
 
-    INTERFACES zif_guidrasil_func_receiver .
+  interfaces ZIF_GUIDRASIL_FUNC_RECEIVER .
 
-    CONSTANTS icon_container TYPE zguidrasil_icon_name  VALUE icon_wd_view_container ##NO_TEXT.
-    CONSTANTS k_mode_design TYPE char01 VALUE 'D' ##NO_TEXT.
-    CONSTANTS k_mode_pattern TYPE char01 VALUE 'P' ##NO_TEXT.
+  constants ICON_CONTAINER type ZGUIDRASIL_ICON_NAME value ICON_WD_VIEW_CONTAINER ##NO_TEXT.
+  constants K_MODE_DESIGN type CHAR01 value 'D' ##NO_TEXT.
+  constants K_MODE_PATTERN type CHAR01 value 'P' ##NO_TEXT.
 
-    CLASS-METHODS class_constructor .
-    CLASS-METHODS init_control_name
-      IMPORTING
-        !iv_text       TYPE c
-      RETURNING
-        VALUE(ev_name) TYPE text30 .
-    METHODS add_container
-      IMPORTING
-        !iv_side       TYPE i
-        !iv_control_id TYPE i OPTIONAL .
-    METHODS add_container_box .
-    METHODS add_container_cc
-      IMPORTING
-        !cc_name TYPE clike OPTIONAL .
-    METHODS build .
-    METHODS constructor
-      IMPORTING
-        !iv_pname TYPE zguidrasil_project
-        !iv_mode  TYPE char01 DEFAULT space .
-    METHODS get_creation_code
-      RETURNING
-        VALUE(code) TYPE string_table .
-    METHODS get_event_pattern
-      RETURNING
-        VALUE(pattern) TYPE string_table .
-    METHODS get_event_pattern_plus
-      RETURNING
-        VALUE(pattern) TYPE string_table .
-    METHODS get_object_by_name
-      IMPORTING
-        !name         TYPE clike
-      RETURNING
-        VALUE(object) TYPE REF TO cl_gui_object .
-    METHODS save .
+  class-methods CLASS_CONSTRUCTOR .
+  class-methods INIT_CONTROL_NAME
+    importing
+      !IV_TEXT type C
+    returning
+      value(EV_NAME) type TEXT30 .
+  methods ADD_CONTAINER
+    importing
+      !IV_SIDE type I
+      !IV_CONTROL_ID type I optional .
+  methods ADD_CONTAINER_BOX .
+  methods ADD_CONTAINER_CC
+    importing
+      !CC_NAME type CLIKE optional .
+  methods BUILD .
+  methods CONSTRUCTOR
+    importing
+      !IV_PNAME type ZGUIDRASIL_PROJECT
+      !IV_MODE type CHAR01 default SPACE .
+  methods GET_CREATION_CODE
+    returning
+      value(CODE) type STRING_TABLE .
+  methods GET_EVENT_PATTERN
+    returning
+      value(PATTERN) type STRING_TABLE .
+  methods GET_EVENT_PATTERN_PLUS
+    returning
+      value(PATTERN) type STRING_TABLE .
+  methods GET_OBJECT_BY_NAME
+    importing
+      !NAME type CLIKE
+    returning
+      value(OBJECT) type ref to CL_GUI_OBJECT .
+  methods SAVE .
   PROTECTED SECTION.
 *"* protected components of class ZCL_GUIDRASIL_CONTROL_BUILDER
 *"* do not include other source files here!!!
@@ -65,97 +65,97 @@ CLASS zcl_guidrasil_builder DEFINITION
         !fcode              TYPE clike
       RETURNING
         VALUE(it_functions) TYPE ttb_button .
-  PRIVATE SECTION.
+private section.
+
+  types:
 *"* private components of class ZCL_GUIDRASIL_BUILDER
 *"* do not include other source files here!!!
-
-    TYPES:
-      BEGIN OF gys_control_classes,
+    BEGIN OF gys_control_classes,
         id        TYPE i, "numc5,
         classname TYPE seoclsname,
       END OF gys_control_classes .
-    TYPES:
-      gyt_control_classes TYPE SORTED TABLE OF gys_control_classes
+  types:
+    gyt_control_classes TYPE SORTED TABLE OF gys_control_classes
         WITH UNIQUE KEY id .
-    TYPES:
-      BEGIN OF gys_control_admin,
+  types:
+    BEGIN OF gys_control_admin,
         id          TYPE i,
         name        TYPE string,
         parent      TYPE REF TO zcl_guidrasil_control_base,
         parent_name TYPE zguidrasil_container_name,
         control     TYPE REF TO zcl_guidrasil_control_base,
       END OF gys_control_admin .
-    TYPES:
-      gyt_control_admin TYPE TABLE OF gys_control_admin .
+  types:
+    gyt_control_admin TYPE TABLE OF gys_control_admin .
 
-    CLASS-DATA mt_idx TYPE ty_idx_t .
-    CLASS-DATA mt_ctls TYPE zguidrasil_ctls_t .
-    CLASS-DATA gv_control_id TYPE numc3 .
-    DATA current_control_id TYPE i .
-    DATA r_toolbar TYPE REF TO cl_gui_toolbar .
-    DATA mt_controls TYPE zguidrasil_obj_t .
-    DATA mode TYPE char01 .
-    DATA pname TYPE char40 .
-    DATA r_docking TYPE REF TO cl_gui_docking_container .
-    DATA r_toolbar_container TYPE REF TO cl_gui_dialogbox_container .
-    CLASS-DATA gt_control_classes TYPE gyt_control_classes .
-    DATA t_control_admin TYPE gyt_control_admin .
-    CLASS-DATA gt_delete_function TYPE ttb_button .
-    CLASS-DATA gt_close_function TYPE ttb_button .
-    CLASS-DATA gt_insert_function TYPE ttb_button .
-    CLASS-DATA gt_pattern_function TYPE ttb_button .
-    DATA gt_control_list TYPE zguidrasil_control_list_t .
+  class-data MT_IDX type TY_IDX_T .
+  class-data MT_CTLS type ZGUIDRASIL_CTLS_T .
+  class-data GV_CONTROL_ID type NUMC3 .
+  data CURRENT_CONTROL_ID type I .
+  data R_TOOLBAR type ref to CL_GUI_TOOLBAR .
+  data MT_CONTROLS type ZGUIDRASIL_OBJ_T .
+  data MODE type CHAR01 .
+  data PNAME type CHAR40 .
+  data R_DOCKING type ref to CL_GUI_DOCKING_CONTAINER .
+  data R_TOOLBAR_CONTAINER type ref to CL_GUI_DIALOGBOX_CONTAINER .
+  class-data GT_CONTROL_CLASSES type GYT_CONTROL_CLASSES .
+  data T_CONTROL_ADMIN type GYT_CONTROL_ADMIN .
+  class-data GT_DELETE_FUNCTION type TTB_BUTTON .
+  class-data GT_CLOSE_FUNCTION type TTB_BUTTON .
+  class-data GT_INSERT_FUNCTION type TTB_BUTTON .
+  class-data GT_PATTERN_FUNCTION type TTB_BUTTON .
+  data GT_CONTROL_LIST type ZGUIDRASIL_CONTROL_LIST_T .
 
-    CLASS-METHODS get_name_button
-      IMPORTING
-        !ir_control   TYPE REF TO zcl_guidrasil_control_base
-      CHANGING
-        !ct_functions TYPE ttb_button .
-    METHODS add_control
-      IMPORTING
-        !ir_control     TYPE REF TO zcl_guidrasil_control_base
-        !ir_parent      TYPE REF TO zcl_guidrasil_control_base OPTIONAL
-        !iv_parent_name TYPE clike OPTIONAL .
-    METHODS build_control_toolbar
-      IMPORTING
-        !ir_wrapper TYPE REF TO zcl_guidrasil_design_container .
-    METHODS build_design_toolbar .
-    METHODS build_edit_toolbar
-      IMPORTING
-        !ir_wrapper         TYPE REF TO zcl_guidrasil_design_container
-        !ir_control_builder TYPE REF TO zcl_guidrasil_control_base .
-    METHODS build_pattern_toolbar
-      IMPORTING
-        !ir_wrapper         TYPE REF TO zcl_guidrasil_design_container
-        !ir_control_builder TYPE REF TO zcl_guidrasil_control_base .
-    METHODS code_replace
-      IMPORTING
-        !search  TYPE clike
-        !replace TYPE clike
-        !prefix  TYPE clike
-      CHANGING
-        !code    TYPE string_table .
-    METHODS create_wrapper
-      IMPORTING
-        !iv_control_toolbar TYPE xfeld OPTIONAL
-        !iv_edit_toolbar    TYPE xfeld OPTIONAL
-        !ir_container       TYPE REF TO cl_gui_container OPTIONAL
-        !ir_parent_builder  TYPE REF TO zcl_guidrasil_control_base
-      EXPORTING
-        !er_wrapper         TYPE REF TO zcl_guidrasil_design_container .
-    METHODS is_close_function_enabled
-      IMPORTING
-        !ir_wrapper       TYPE REF TO zcl_guidrasil_design_container
-      RETURNING
-        VALUE(rv_enabled) TYPE xfeld .
-    METHODS on_design_function_selected
-          FOR EVENT function_selected OF cl_gui_toolbar
-      IMPORTING
-          !fcode .
-    METHODS set_current_control_id
-      RETURNING
-        VALUE(control_id) TYPE i .
-    METHODS update_controls .
+  class-methods GET_NAME_BUTTON
+    importing
+      !IR_CONTROL type ref to ZCL_GUIDRASIL_CONTROL_BASE
+    changing
+      !CT_FUNCTIONS type TTB_BUTTON .
+  methods ADD_CONTROL
+    importing
+      !IR_CONTROL type ref to ZCL_GUIDRASIL_CONTROL_BASE
+      !IR_PARENT type ref to ZCL_GUIDRASIL_CONTROL_BASE optional
+      !IV_PARENT_NAME type CLIKE optional .
+  methods BUILD_CONTROL_TOOLBAR
+    importing
+      !IR_WRAPPER type ref to ZCL_GUIDRASIL_DESIGN_CONTAINER .
+  methods BUILD_DESIGN_TOOLBAR .
+  methods BUILD_EDIT_TOOLBAR
+    importing
+      !IR_WRAPPER type ref to ZCL_GUIDRASIL_DESIGN_CONTAINER
+      !IR_CONTROL_BUILDER type ref to ZCL_GUIDRASIL_CONTROL_BASE .
+  methods BUILD_PATTERN_TOOLBAR
+    importing
+      !IR_WRAPPER type ref to ZCL_GUIDRASIL_DESIGN_CONTAINER
+      !IR_CONTROL_BUILDER type ref to ZCL_GUIDRASIL_CONTROL_BASE .
+  methods CODE_REPLACE
+    importing
+      !SEARCH type CLIKE
+      !REPLACE type CLIKE
+      !PREFIX type CLIKE
+    changing
+      !CODE type STRING_TABLE .
+  methods CREATE_WRAPPER
+    importing
+      !IV_CONTROL_TOOLBAR type XFELD optional
+      !IV_EDIT_TOOLBAR type XFELD optional
+      !IR_CONTAINER type ref to CL_GUI_CONTAINER optional
+      !IR_PARENT_BUILDER type ref to ZCL_GUIDRASIL_CONTROL_BASE
+    exporting
+      !ER_WRAPPER type ref to ZCL_GUIDRASIL_DESIGN_CONTAINER .
+  methods IS_CLOSE_FUNCTION_ENABLED
+    importing
+      !IR_WRAPPER type ref to ZCL_GUIDRASIL_DESIGN_CONTAINER
+    returning
+      value(RV_ENABLED) type XFELD .
+  methods ON_DESIGN_FUNCTION_SELECTED
+    for event FUNCTION_SELECTED of CL_GUI_TOOLBAR
+    importing
+      !FCODE .
+  methods SET_CURRENT_CONTROL_ID
+    returning
+      value(CONTROL_ID) type I .
+  methods UPDATE_CONTROLS .
 ENDCLASS.
 
 
@@ -1159,11 +1159,9 @@ CLASS ZCL_GUIDRASIL_BUILDER IMPLEMENTATION.
 
   METHOD get_event_pattern_plus.
 
-*  pattern = /inw/enhema_code_creation=>create_code_complete(
-*                it_controls     = mt_controls
-*                it_control_list = gt_control_list ).
-
-    zcl_guidrasil_tools=>todo( 'Code Creation' ).
+    pattern = zcl_guidrasil_code_creation=>create_code_complete(
+                  it_controls     = mt_controls
+                  it_control_list = gt_control_list ).
 
   ENDMETHOD.
 

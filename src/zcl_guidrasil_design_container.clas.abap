@@ -1,39 +1,39 @@
-CLASS zcl_guidrasil_design_container DEFINITION
-  PUBLIC
-  INHERITING FROM zcl_guidrasil_control_base
-  FINAL
-  CREATE PUBLIC .
+class ZCL_GUIDRASIL_DESIGN_CONTAINER definition
+  public
+  inheriting from ZCL_GUIDRASIL_CONTROL_BASE
+  final
+  create public .
 
 *"* public components of class ZCL_GUIDRASIL_DESIGN_CONTAINER
 *"* do not include other source files here!!!
-  PUBLIC SECTION.
+public section.
 
-    METHODS get_parent
-      RETURNING
-        VALUE(rr_control) TYPE REF TO zcl_guidrasil_control_base .
-    METHODS remove_child .
-    METHODS clear_toolbar .
-    METHODS add_functions
-      IMPORTING
-        !it_function TYPE ttb_button
-        !ir_sender   TYPE REF TO object
-        !ir_receiver TYPE REF TO zif_guidrasil_func_receiver
-        !it_funcmenu TYPE ttb_btnmnu OPTIONAL .
-    METHODS constructor
-      IMPORTING
-        !ir_parent_container TYPE REF TO cl_gui_container
-        !ir_parent_control   TYPE REF TO zcl_guidrasil_control_base .
+  methods GET_PARENT
+    returning
+      value(RR_CONTROL) type ref to ZCL_GUIDRASIL_CONTROL_BASE .
+  methods REMOVE_CHILD .
+  methods CLEAR_TOOLBAR .
+  methods ADD_FUNCTIONS
+    importing
+      !IT_FUNCTION type TTB_BUTTON
+      !IR_SENDER type ref to OBJECT
+      !IR_RECEIVER type ref to ZIF_GUIDRASIL_FUNC_RECEIVER
+      !IT_FUNCMENU type TTB_BTNMNU optional .
+  methods CONSTRUCTOR
+    importing
+      !IR_PARENT_CONTAINER type ref to CL_GUI_CONTAINER
+      !IR_PARENT_CONTROL type ref to ZCL_GUIDRASIL_CONTROL_BASE .
 
-    METHODS get_container_first
-        REDEFINITION .
-    METHODS get_container_list
-        REDEFINITION .
-    METHODS get_container_name
-        REDEFINITION .
-    METHODS provide_control_name
-        REDEFINITION .
-    METHODS provide_toolbar
-        REDEFINITION .
+  methods GET_CONTAINER_FIRST
+    redefinition .
+  methods GET_CONTAINER_LIST
+    redefinition .
+  methods GET_CONTAINER_NAME
+    redefinition .
+  methods PROVIDE_CONTROL_NAME
+    redefinition .
+  methods PROVIDE_TOOLBAR
+    redefinition .
   PROTECTED SECTION.
 *"* protected components of class ZCL_GUIDRASIL_DESIGN_CONTAINER
 *"* do not include other source files here!!!
