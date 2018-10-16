@@ -598,6 +598,7 @@ CLASS ZCL_GUIDRASIL_BUILDER IMPLEMENTATION.
 * Hinzufügbare Controls
     APPEND LINES OF gt_insert_function TO lt_functions.
 
+
     CALL METHOD ir_wrapper->add_functions
       EXPORTING
         it_function = lt_functions
@@ -711,6 +712,8 @@ CLASS ZCL_GUIDRASIL_BUILDER IMPLEMENTATION.
         ir_control   = ir_control_builder
       CHANGING
         ct_functions = lt_function.
+
+
 
 
     CALL METHOD ir_wrapper->add_functions
@@ -1229,6 +1232,16 @@ CLASS ZCL_GUIDRASIL_BUILDER IMPLEMENTATION.
     ls_function-butn_type = cntb_btype_button.
     ls_function-quickinfo = 'Change Control Attributes'.
     APPEND ls_function TO ct_functions.
+
+* Funktion für die control eigenen Änderungen
+    CLEAR ls_function.
+    ls_function-function  = '$CTRLFUNC'.
+    ls_function-icon      = icon_detail.
+    ls_function-butn_type = cntb_btype_dropdown.
+    ls_function-quickinfo = 'Control attributes'.
+    APPEND ls_function TO ct_functions.
+
+    zcl_guidrasil_tools=>todo( 'Wenn control keine Funktionen zur Verfügung stellt, darf der Knopf nicht angezeigt werden...' ).
 
   ENDMETHOD.
 

@@ -2,7 +2,7 @@ FUNCTION Z_GUIDRASIL_CONTROL_ICON_POPUP .
 *"----------------------------------------------------------------------
 *"*"Local Interface:
 *"  IMPORTING
-*"     REFERENCE(IR_CONTROL) TYPE REF TO  CL_GUI_CONTROL
+*"     REFERENCE(IR_CONTROL) TYPE REF TO  OBJECT
 *"  CHANGING
 *"     REFERENCE(CS_SETTINGS) TYPE  ZGUIDRASIL_SETTING_ICON
 *"  EXCEPTIONS
@@ -21,7 +21,6 @@ FUNCTION Z_GUIDRASIL_CONTROL_ICON_POPUP .
   ENDIF.
   FREE gr_picture.
   FREE gr_container.
-
 
   CALL SCREEN 50 STARTING AT 10 5.
 

@@ -177,15 +177,16 @@ CLASS ZCL_GUIDRASIL_CONTROL_TEXT IMPLEMENTATION.
 
   METHOD get_design_functions.
 
-    DATA:
-      lx_menu     TYPE REF TO cl_ctmenu,                 "ew
-      lv_text     TYPE gui_text,                         "ew
-      ls_funcmenu TYPE stb_btnmnu,                       "ew
-      ls_function TYPE stb_button.
+    DATA lx_menu     TYPE REF TO cl_ctmenu.                 "ew
+    data lv_text     TYPE gui_text.                         "ew
+    data ls_funcmenu TYPE stb_btnmnu.                       "ew
+    data ls_function TYPE stb_button.
+
+    create object lx_menu.
 
 *>>> dropdown
     ls_function-icon      = icon_detail.
-    ls_function-butn_type = cntb_id_dropdown.                "cntb_btype_dropdown.
+    ls_function-butn_type = cntb_id_dropdown.
     ls_function-function  = 'TEXT_DROPDOWN'.
     ls_function-text      = ''.
     ls_function-quickinfo = 'Controlfunktionen'.
@@ -201,16 +202,29 @@ CLASS ZCL_GUIDRASIL_CONTROL_TEXT IMPLEMENTATION.
     ls_function-quickinfo = 'Anzeige-/Editiermodus'.
     APPEND ls_function TO et_functions.
 
+    lx_menu->add_function( fcode = ls_function-function
+                           text  = ls_function-text ).
+
     ls_function-function  = c_function_toolbar.
     ls_function-text      = 'Toolbar'.
     ls_function-quickinfo = 'Toolbar ein-/ausblenden'.
     APPEND ls_function TO et_functions.
+    lx_menu->add_function( fcode = ls_function-function
+                           text  = ls_function-text ).
 
     ls_function-function  = c_function_statusbar.
     ls_function-text      = 'Statusbar'.
     ls_function-quickinfo = 'Statusbar ein-/ausblenden'.
     APPEND ls_function TO et_functions.
+    lx_menu->add_function( fcode = ls_function-function
+                           text  = ls_function-text ).
 
+
+    ls_funcmenu-function = '$CTRLFUNC'.
+    ls_funcmenu-ctmenu   = lx_menu.
+    append ls_funcmenu to et_funcmenus.
+
+    zcl_guidrasil_tools=>todo( 'das war anders gedacht...' ).
 
   ENDMETHOD.
 
@@ -409,7 +423,7 @@ CLASS ZCL_GUIDRASIL_CONTROL_TEXT IMPLEMENTATION.
 
     CALL FUNCTION 'Z_GUIDRASIL_CONTROL_TEXT_POPUP'
       EXPORTING
-        ir_control          = gr_control
+        ir_control          = lr_text
       CHANGING
         cs_settings         = gs_settings
       EXCEPTIONS
