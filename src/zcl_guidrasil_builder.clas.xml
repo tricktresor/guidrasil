@@ -16,6 +16,14 @@
     <RSTAT>T</RSTAT>
     <MSG_ID>ZGUIDRASIL</MSG_ID>
    </VSEOCLASS>
+   <TPOOL>
+    <item>
+     <ID>I</ID>
+     <KEY>CTA</KEY>
+     <ENTRY>Control attributes</ENTRY>
+     <LENGTH>28</LENGTH>
+    </item>
+   </TPOOL>
    <DESCRIPTIONS>
     <SEOCOMPOTX>
      <CLSNAME>ZCL_GUIDRASIL_BUILDER</CLSNAME>

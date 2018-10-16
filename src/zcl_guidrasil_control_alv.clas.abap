@@ -28,26 +28,32 @@ public section.
     redefinition .
   methods ZIF_GUIDRASIL_FUNC_RECEIVER~ON_FUNCTION_SELECTED
     redefinition .
-  PROTECTED SECTION.
+  methods GET_DESIGN_FUNCTIONS
+    redefinition .
+protected section.
+
 *"* protected components of class ZCL_GUIDRASIL_CONTROL_ALV
 *"* do not include other source files here!!!
+  methods HANDLE_DOUBLE_CLICK
+    for event DOUBLE_CLICK of CL_GUI_ALV_GRID
+    importing
+      !E_ROW
+      !E_COLUMN
+      !ES_ROW_NO .
+private section.
 
-    METHODS handle_double_click
-          FOR EVENT double_click OF cl_gui_alv_grid
-      IMPORTING
-          !e_row
-          !e_column
-          !es_row_no .
-  PRIVATE SECTION.
+  data:
 *"* private components of class ZCL_GUIDRASIL_CONTROL_ALV
 *"* do not include other source files here!!!
-
-    DATA gt_alv_dummy TYPE STANDARD TABLE OF icon .
-    DATA c_function_structure TYPE ui_func VALUE 'FUNCTN_GRID_STRUCTURE' ##NO_TEXT.
-    DATA c_function_toolbar TYPE ui_func VALUE 'FUNCTN_GRID_TOOLBAR' ##NO_TEXT.
-    DATA ms_settings TYPE zguidrasil_setting_grid .
-    DATA mr_alv TYPE REF TO cl_gui_alv_grid .
-    DATA mr_parent TYPE REF TO cl_gui_container .
+    gt_alv_dummy TYPE STANDARD TABLE OF icon .
+  data C_FUNCTION_STRUCTURE type UI_FUNC value 'FUNCTN_GRID_STRUCTURE' ##NO_TEXT.
+  data C_FUNCTION_TOOLBAR type UI_FUNC value 'FUNCTN_GRID_TOOLBAR' ##NO_TEXT.
+  data MS_SETTINGS type ZGUIDRASIL_SETTING_GRID .
+  data MR_ALV type ref to CL_GUI_ALV_GRID .
+  data MR_PARENT type ref to CL_GUI_CONTAINER .
+  data C_FUNCTION_NO_TOOLBAR type UI_FUNC value 'Layout_No_Toolbar' ##NO_TEXT.
+  data C_FUNCTION_NO_HEADERS type UI_FUNC value 'Layout_No_Headers' ##NO_TEXT.
+  data C_FUNCTION_SMALLTITLE type UI_FUNC value 'Layout_Small_Title' ##NO_TEXT.
 ENDCLASS.
 
 
@@ -57,6 +63,7 @@ CLASS ZCL_GUIDRASIL_CONTROL_ALV IMPLEMENTATION.
 
   METHOD APPLY_SETTINGS.
 
+    data ls_layout type lvc_s_layo.
 
     FIELD-SYMBOLS <data> TYPE STANDARD TABLE.
 
@@ -96,14 +103,21 @@ CLASS ZCL_GUIDRASIL_CONTROL_ALV IMPLEMENTATION.
       IF ms_settings-sort IS NOT INITIAL.
         mr_alv->set_sort_criteria( it_sort = ms_settings-sort ).
       ENDIF.
-      mr_alv->refresh_table_display( ).
+*      mr_alv->refresh_table_display( ).
     ENDIF.
 
-    DATA lt_events TYPE cntl_simple_events.
-    DATA ls_event  TYPE cntl_simple_event.
-    mr_alv->get_registered_events( IMPORTING events = lt_events ).
+    mr_alv->get_frontend_layout( IMPORTING es_layout = ls_layout ).
+    ls_layout-no_toolbar = ms_settings-no_toolbar.
+    ls_layout-no_headers = ms_settings-no_headers.
+    ls_layout-smalltitle = ms_settings-smalltitle.
+    mr_alv->set_frontend_layout( ls_layout ).
+    mr_alv->refresh_table_display( ).
 
-    SET HANDLER handle_double_click FOR mr_alv.
+*    DATA lt_events TYPE cntl_simple_events.
+*    DATA ls_event  TYPE cntl_simple_event.
+*    mr_alv->get_registered_events( IMPORTING events = lt_events ).
+*
+*    SET HANDLER handle_double_click FOR mr_alv.
 
   ENDMETHOD.
 
@@ -128,6 +142,49 @@ CLASS ZCL_GUIDRASIL_CONTROL_ALV IMPLEMENTATION.
     mr_parent  = ir_parent.
 
     apply_settings( ).
+
+    DATA lt_events TYPE cntl_simple_events.
+    DATA ls_event  TYPE cntl_simple_event.
+    mr_alv->get_registered_events( IMPORTING events = lt_events ).
+
+    SET HANDLER handle_double_click FOR mr_alv.
+
+  ENDMETHOD.
+
+
+  METHOD get_design_functions.
+
+    DATA lx_menu     TYPE REF TO cl_ctmenu.                 "ew
+    DATA lv_text     TYPE gui_text.                         "ew
+    DATA ls_funcmenu TYPE stb_btnmnu.                       "ew
+    DATA ls_function TYPE stb_button.
+
+    CREATE OBJECT lx_menu.
+
+
+    ls_function-icon       = icon_active_inactive.
+    ls_function-butn_type  = cntb_id_dropmenu.
+
+
+    ls_function-function  = c_function_no_toolbar.
+    ls_function-text      = 'Hide toolbar'.
+    ls_function-quickinfo = 'Do not show toolbar'.
+    APPEND ls_function TO et_functions.
+
+
+    ls_function-function  = c_function_no_headers.
+    ls_function-text      = 'Hide headers'.
+    ls_function-quickinfo = 'Do not show column headers'.
+    APPEND ls_function TO et_functions.
+
+    ls_function-function  = c_function_smalltitle.
+    ls_function-text      = 'Small title'.
+    ls_function-quickinfo = 'Use small title'.
+    APPEND ls_function TO et_functions.
+
+    ls_funcmenu-function = '$CTRLFUNC'.
+    ls_funcmenu-ctmenu   = lx_menu.
+    APPEND ls_funcmenu TO et_funcmenus.
 
   ENDMETHOD.
 
@@ -230,15 +287,21 @@ CLASS ZCL_GUIDRASIL_CONTROL_ALV IMPLEMENTATION.
     DATA lv_flag     TYPE i.
     DATA ls_layout   TYPE lvc_s_layo.
 
-    CHECK r_receiver = me.
+*    data: Begin of checked,
+*            no_toolbar type rm_boolean,
+*            no_headers type rm_boolean,
+*            smalltitle type rm_booelean,
+*          end of checked.
+
+*    CHECK r_receiver = me.
 
     lr_grid ?= gr_control.
 
     CASE fcode.
-      WHEN 'GRID_DROPDOWN'.
+      WHEN '$CTRLFUNC'.
         CREATE OBJECT lx_menu.
 
-        lr_grid->get_frontend_layout( IMPORTING es_layout = ls_layout ).
+*        lr_grid->get_frontend_layout( IMPORTING es_layout = ls_layout ).
 
         " Struktur
         lv_text = 'Struktur'(str).
@@ -249,19 +312,24 @@ CLASS ZCL_GUIDRASIL_CONTROL_ALV IMPLEMENTATION.
             checked  = lv_checked
             text     = lv_text.                                "#EC NOTEXT
 
-        " TOOLBAR
-        lv_text = 'Toolbar'(tob).
-        IF ls_layout-no_toolbar = space.
-          lv_checked = abap_true.
-        ELSE.
-          lv_checked = abap_false.
-        ENDIF.
 
         lx_menu->add_function(
-            fcode    = c_function_toolbar
-            disabled = lv_disabled
-            checked  = lv_checked
-            text     = lv_text ).                           "#EC NOTEXT
+            fcode    = c_function_no_toolbar
+            disabled = space
+            checked  = ms_settings-no_toolbar
+            text     = 'Hide toolbar' ).                           "#EC NOTEXT
+
+        lx_menu->add_function(
+            fcode    = c_function_no_headers
+            disabled = space
+            checked  = ms_settings-no_headers
+            text     = 'Hide column headers' ).                           "#EC NOTEXT
+
+        lx_menu->add_function(
+            fcode    = c_function_smalltitle
+            disabled = space
+            checked  = ms_settings-smalltitle
+            text     = 'Use small title' ).                           "#EC NOTEXT
 
         r_toolbar->track_context_menu(
             context_menu = lx_menu
@@ -273,7 +341,7 @@ CLASS ZCL_GUIDRASIL_CONTROL_ALV IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD ZIF_GUIDRASIL_FUNC_RECEIVER~ON_FUNCTION_SELECTED.
+  METHOD zif_guidrasil_func_receiver~on_function_selected.
 
     DATA lr_grid   TYPE REF TO cl_gui_alv_grid.
     DATA lv_text   TYPE gui_text.
@@ -282,7 +350,7 @@ CLASS ZCL_GUIDRASIL_CONTROL_ALV IMPLEMENTATION.
     DATA ls_layout TYPE lvc_s_layo.
 
     CHECK r_receiver = me.
-    lr_grid ?= gr_control.
+*    lr_grid ?= gr_control.
 
     CASE fcode.
 
@@ -290,16 +358,29 @@ CLASS ZCL_GUIDRASIL_CONTROL_ALV IMPLEMENTATION.
       WHEN c_function_structure.
 
 
-      WHEN c_function_toolbar.
-
-        lr_grid->get_frontend_layout( IMPORTING es_layout = ls_layout ).
-        IF ls_layout-no_toolbar = space.
-          ls_layout-no_toolbar = 'X'.
+      WHEN c_function_no_toolbar.
+        IF ms_settings-no_toolbar = space.
+          ms_settings-no_toolbar = abap_true.
         ELSE.
-          ls_layout-no_toolbar = space.
+          ms_settings-no_toolbar = abap_false.
         ENDIF.
-        lr_grid->set_frontend_layout( EXPORTING is_layout = ls_layout ).
-        lr_grid->refresh_table_display( ).
+        apply_settings( ).
+
+      WHEN c_function_no_headers.
+        IF ms_settings-no_headers = space.
+          ms_settings-no_headers = abap_true.
+        ELSE.
+          ms_settings-no_headers = abap_false.
+        ENDIF.
+        apply_settings( ).
+
+      WHEN c_function_smalltitle.
+        IF ms_settings-smalltitle = space.
+          ms_settings-smalltitle = abap_true.
+        ELSE.
+          ms_settings-smalltitle = abap_false.
+        ENDIF.
+        apply_settings( ).
     ENDCASE.
 
     cl_gui_cfw=>flush( ).

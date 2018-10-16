@@ -1235,9 +1235,9 @@ CLASS ZCL_GUIDRASIL_BUILDER IMPLEMENTATION.
 * Funktion für die control eigenen Änderungen
     CLEAR ls_function.
     ls_function-function  = '$CTRLFUNC'.
-    ls_function-icon      = icon_oo_attribute.
+    ls_function-icon      = icon_system_favorites.
     ls_function-butn_type = cntb_btype_dropdown.
-    ls_function-quickinfo = 'Control menu'.
+    ls_function-quickinfo = 'Control attributes'(cta).
     APPEND ls_function TO ct_functions.
 
 

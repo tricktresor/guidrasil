@@ -185,12 +185,12 @@ CLASS ZCL_GUIDRASIL_CONTROL_TEXT IMPLEMENTATION.
     create object lx_menu.
 
 *>>> dropdown
-    ls_function-icon      = icon_detail.
-    ls_function-butn_type = cntb_id_dropdown.
-    ls_function-function  = 'TEXT_DROPDOWN'.
-    ls_function-text      = ''.
-    ls_function-quickinfo = 'Controlfunktionen'.
-    APPEND ls_function TO et_functions.
+*    ls_function-icon      = icon_detail.
+*    ls_function-butn_type = cntb_id_dropdown.
+*    ls_function-function  = 'TEXT_DROPDOWN'.
+*    ls_function-text      = ''.
+*    ls_function-quickinfo = 'Controlfunktionen'.
+*    APPEND ls_function TO et_functions.
 *<<< dropdown
 
 *  ls_function-icon       = icon_active_inactive.
@@ -223,8 +223,6 @@ CLASS ZCL_GUIDRASIL_CONTROL_TEXT IMPLEMENTATION.
     ls_funcmenu-function = '$CTRLFUNC'.
     ls_funcmenu-ctmenu   = lx_menu.
     append ls_funcmenu to et_funcmenus.
-
-    zcl_guidrasil_tools=>todo( 'das war anders gedacht...' ).
 
   ENDMETHOD.
 

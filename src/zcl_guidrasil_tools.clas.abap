@@ -50,7 +50,7 @@ ENDMETHOD.
 
 METHOD view_attributes.
 
-  MESSAGE 'Display attributes (todo)' TYPE 'I'.
+  MESSAGE 'No attributes to display'(msg) TYPE 'S'.
 
 ENDMETHOD.
 ENDCLASS.
