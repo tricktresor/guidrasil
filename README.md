@@ -9,6 +9,8 @@ Wikipedia: https://en.wikipedia.org/wiki/Yggdrasil
 
 The project name _guidrasil_ shall indicate that the SAPGUI is still the center of everything. If SAPGUI will die, the world ends. 
 
+See blog post about guidrasil at [http://blogs.sap.com](https://blogs.sap.com/2018/10/10/sapgui-is-dead-long-live-sapgui/).
+
 # idea
 guidrasil is a GUI-Designer which I started to build with a former colleague. The idea is that every control can be generically managed. You just need a unique, standardized shell wrapped around the controls so that they can be created all the same. 
 
