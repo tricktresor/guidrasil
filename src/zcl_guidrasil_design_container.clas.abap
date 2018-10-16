@@ -115,6 +115,7 @@ CLASS ZCL_GUIDRASIL_DESIGN_CONTAINER IMPLEMENTATION.
 
     CHECK sy-subrc = 0.
 
+    if 1 = 2.
     IF it_funcmenu IS NOT INITIAL.
       r_toolbar->assign_static_ctxmenu_table( table_ctxmenu = it_funcmenu ).
       LOOP AT it_funcmenu ASSIGNING <ls_funcmenu>.
@@ -128,6 +129,7 @@ CLASS ZCL_GUIDRASIL_DESIGN_CONTAINER IMPLEMENTATION.
           INSERT ls_function_list INTO TABLE t_function_list.
         ENDLOOP.
       ENDLOOP.
+    ENDIF.
     ENDIF.
 
     SET HANDLER ir_receiver->on_function_selected FOR me.

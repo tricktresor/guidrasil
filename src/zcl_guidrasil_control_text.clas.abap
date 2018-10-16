@@ -202,22 +202,22 @@ CLASS ZCL_GUIDRASIL_CONTROL_TEXT IMPLEMENTATION.
     ls_function-quickinfo = 'Anzeige-/Editiermodus'.
     APPEND ls_function TO et_functions.
 
-    lx_menu->add_function( fcode = ls_function-function
-                           text  = ls_function-text ).
+*    lx_menu->add_function( fcode = ls_function-function
+*                           text  = ls_function-text ).
 
     ls_function-function  = c_function_toolbar.
     ls_function-text      = 'Toolbar'.
     ls_function-quickinfo = 'Toolbar ein-/ausblenden'.
     APPEND ls_function TO et_functions.
-    lx_menu->add_function( fcode = ls_function-function
-                           text  = ls_function-text ).
+*    lx_menu->add_function( fcode = ls_function-function
+*                           text  = ls_function-text ).
 
     ls_function-function  = c_function_statusbar.
     ls_function-text      = 'Statusbar'.
     ls_function-quickinfo = 'Statusbar ein-/ausblenden'.
     APPEND ls_function TO et_functions.
-    lx_menu->add_function( fcode = ls_function-function
-                           text  = ls_function-text ).
+*    lx_menu->add_function( fcode = ls_function-function
+*                           text  = ls_function-text ).
 
 
     ls_funcmenu-function = '$CTRLFUNC'.
@@ -446,13 +446,13 @@ CLASS ZCL_GUIDRASIL_CONTROL_TEXT IMPLEMENTATION.
       lv_flag     TYPE i.
 
 
-    CHECK r_receiver = me.
+*    CHECK r_receiver = me.
 
     lr_text ?= gr_control.
 
 
     CASE fcode.
-      WHEN 'TEXT_DROPDOWN'.
+      WHEN '$CTRLFUNC'. "'TEXT_DROPDOWN'.
         CREATE OBJECT lx_menu.
 
 *** EDIT
@@ -526,9 +526,6 @@ CLASS ZCL_GUIDRASIL_CONTROL_TEXT IMPLEMENTATION.
 
     CASE fcode.
 
-      WHEN 'SWITCH'.
-*      CREATE OBJECT lx_menu.
-
       WHEN c_function_readonly.
 
         IF lr_text->m_readonly_mode = 0.
@@ -537,13 +534,9 @@ CLASS ZCL_GUIDRASIL_CONTROL_TEXT IMPLEMENTATION.
           lv_flag = 0.
         ENDIF.
 
-        CALL METHOD lr_text->set_readonly_mode
-          EXPORTING
-            readonly_mode          = lv_flag
-          EXCEPTIONS
-            error_cntl_call_method = 1
-            OTHERS                 = 2.
-
+*        lr_text->set_readonly_mode( readonly_mode = lv_flag ).
+        gs_settings-readonly = lv_flag.
+        apply_settings( ).
 
       WHEN c_function_toolbar.
 
@@ -553,12 +546,9 @@ CLASS ZCL_GUIDRASIL_CONTROL_TEXT IMPLEMENTATION.
           lv_flag = 0.
         ENDIF.
 
-        CALL METHOD lr_text->set_toolbar_mode
-          EXPORTING
-            toolbar_mode = lv_flag
-          EXCEPTIONS
-            OTHERS       = 3.
-
+*        lr_text->set_toolbar_mode( toolbar_mode = lv_flag ).
+        gs_settings-toolbar = lv_flag.
+        apply_settings( ).
 
       WHEN c_function_statusbar.
 
@@ -568,11 +558,9 @@ CLASS ZCL_GUIDRASIL_CONTROL_TEXT IMPLEMENTATION.
           lv_flag = 0.
         ENDIF.
 
-        CALL METHOD lr_text->set_statusbar_mode
-          EXPORTING
-            statusbar_mode = lv_flag
-          EXCEPTIONS
-            OTHERS         = 3.
+*        lr_text->set_statusbar_mode( statusbar_mode = lv_flag ).
+        gs_settings-statusbar = lv_flag.
+        apply_settings( ).
 
     ENDCASE.
 

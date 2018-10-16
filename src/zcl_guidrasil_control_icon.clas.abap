@@ -38,18 +38,22 @@ public section.
     redefinition .
   methods ZIF_GUIDRASIL_FUNC_RECEIVER~ON_DROPDOWN_CLICKED
     redefinition .
+  methods ZIF_GUIDRASIL_FUNC_RECEIVER~ON_FUNCTION_SELECTED
+    redefinition .
 protected section.
 *"* protected components of class ZCL_GUIDRASIL_CONTROL_ICON
 *"* do not include other source files here!!!
 
-  data MS_SETTINGS type ZGUIDRASIL_SETTING_ICON .
   data MR_CONTROL_SETTINGS type ref to ZCL_GUIDRASIL_ATTR_ICON .
+  data MS_SETTINGS type ZGUIDRASIL_SETTING_ICON .
 private section.
 *"* private components of class ZCL_GUIDRASIL_CONTROL_ICON
 *"* do not include other source files here!!!
 
   constants C_FUNCTION_FIT type UI_FUNC value 'PicFit' ##NO_TEXT.
+  constants C_FUNCTION_FIT_CENTERED type UI_FUNC value 'PicFitCent' ##NO_TEXT.
   constants C_FUNCTION_NORMAL type UI_FUNC value 'PicNormal' ##NO_TEXT.
+  constants C_FUNCTION_NORMAL_CENTERED type UI_FUNC value 'PicNormalCent' ##NO_TEXT.
   constants C_FUNCTION_STRETCH type UI_FUNC value 'PicStretch' ##NO_TEXT.
 
   class-methods GET_RANDOM_ICON
@@ -150,36 +154,59 @@ METHOD CREATE.
 ENDMETHOD.
 
 
-  method GET_DESIGN_FUNCTIONS.
+  METHOD get_design_functions.
 
-  data ls_function        TYPE stb_button.
+    DATA lx_menu     TYPE REF TO cl_ctmenu.                 "ew
+    DATA ls_function        TYPE stb_button.
+    DATA ls_funcmenu TYPE stb_btnmnu.                       "ew
 
-  et_functions = mr_control_functions->get_design_functions( ).
+*    et_functions = mr_control_functions->get_design_functions( ).
 
 *>>> dropdown
-  ls_function-icon       = icon_detail.
-  ls_function-butn_type  = cntb_id_dropdown. "cntb_btype_dropdown.
-  ls_function-function   = 'PIC_DROPDOWN'.
-  ls_function-text       = ''.
-  ls_function-quickinfo  = 'Controlfunktionen'.
-  APPEND ls_function TO et_functions.
+*    ls_function-icon       = icon_detail.
+*    ls_function-butn_type  = cntb_id_dropdown. "cntb_btype_dropdown.
+*    ls_function-function   = 'PIC_DROPDOWN'.
+*    ls_function-text       = ''.
+*    ls_function-quickinfo  = 'Controlfunktionen'.
+*    APPEND ls_function TO et_functions.
 *<<< dropdown
 
-*
-*  ls_function-butn_type  = cntb_id_dropmenu.
-*
-*
-*  ls_function-function   = c_function_stretch.
-*  APPEND ls_function TO et_functions.
-*
-*  ls_function-function   = c_function_normal.
-*  APPEND ls_function TO et_functions.
-*
-*  ls_function-function   = c_function_fit.
-*  APPEND ls_function TO et_functions.
+
+    ls_function-butn_type  = cntb_id_dropmenu.
 
 
-  endmethod.
+    ls_function-function   = c_function_stretch.
+    ls_function-text       = 'Stretch'.
+    ls_function-quickinfo  = 'Stretch icon'.
+    APPEND ls_function TO et_functions.
+
+    ls_function-function   = c_function_normal.
+    ls_function-text       = 'Normal'.
+    ls_function-quickinfo  = 'Display normal'.
+    APPEND ls_function TO et_functions.
+
+    ls_function-function   = c_function_fit.
+    ls_function-text       = 'Fit'.
+    ls_function-quickinfo  = 'Stretch to fit container'.
+    APPEND ls_function TO et_functions.
+
+    ls_function-function   = c_function_normal_centered.
+    ls_function-text       = 'Normal centered'.
+    ls_function-quickinfo  = 'Display normal (centered)'.
+    APPEND ls_function TO et_functions.
+
+    ls_function-function   = c_function_fit_centered.
+    ls_function-text       = 'Fit'.
+    ls_function-quickinfo  = 'Fit container (centered)'.
+    APPEND ls_function TO et_functions.
+
+    ls_funcmenu-function = '$CTRLFUNC'.
+    ls_funcmenu-ctmenu   = lx_menu.
+    APPEND ls_funcmenu TO et_funcmenus.
+
+
+
+  ENDMETHOD.
 
 
 METHOD GET_ICON_ID.
@@ -313,27 +340,107 @@ ENDMETHOD.
   METHOD zif_guidrasil_func_receiver~on_dropdown_clicked.
 
 
-    DATA:
-*    lr_pic      TYPE REF TO cl_gui_picture,
-      lv_text     TYPE gui_text,
-      lv_disabled TYPE cua_active,
-      lv_checked  TYPE cua_active,
-      lx_menu     TYPE REF TO cl_ctmenu,
-      lv_flag     TYPE i.
+    DATA lx_menu     TYPE REF TO cl_ctmenu.
 
+    DATA: BEGIN OF checked,
+            normal          TYPE rm_boolean,
+            normal_centered TYPE rm_boolean,
+            fit             TYPE rm_boolean,
+            fit_centered    TYPE rm_boolean,
+            stretch         TYPE rm_boolean,
+          END OF checked.
 
-    CHECK r_receiver = me.
-
-*  lr_pic ?= gr_control.
+*    CHECK r_receiver = me.
 
 
     CASE fcode.
-      WHEN 'PIC_DROPDOWN'.
-        mr_control_functions->on_dropdown_clicked(
-                     fcode     = fcode
-                     r_toolbar = r_toolbar
-                     posx      = posx
-                     posy      = posy ).
+      WHEN '$CTRLFUNC'.
+        CREATE OBJECT lx_menu.
+        CLEAR checked.
+        CASE ms_settings-display_mode.
+          WHEN cl_gui_picture=>display_mode_fit.
+            checked-fit             = abap_true.
+          WHEN cl_gui_picture=>display_mode_normal.
+            checked-normal          = abap_true.
+          WHEN cl_gui_picture=>display_mode_stretch.
+            checked-stretch         = abap_true.
+          WHEN cl_gui_picture=>display_mode_normal_center.
+            checked-normal_centered = abap_true.
+          WHEN cl_gui_picture=>display_mode_fit_center.
+            checked-fit_centered    = abap_true.
+        ENDCASE.
+
+        lx_menu->add_function(
+            fcode    = c_function_fit
+            disabled = checked-fit
+            checked  = checked-fit
+            text     = 'Fit display' ).                     "#EC NOTEXT
+        lx_menu->add_function(
+            fcode    = c_function_normal
+            disabled = checked-normal
+            checked  = checked-normal
+            text     = 'Normal display' ).                  "#EC NOTEXT
+        lx_menu->add_function(
+            fcode    = c_function_normal_centered
+            disabled = checked-normal_centered
+            checked  = checked-normal_centered
+            text     = 'Normal centered' ).                 "#EC NOTEXT
+        lx_menu->add_function(
+            fcode    = c_function_fit_centered
+            disabled = checked-fit_centered
+            checked  = checked-fit_centered
+            text     = 'Fit centered' ).                    "#EC NOTEXT
+        lx_menu->add_function(
+            fcode    = c_function_stretch
+            disabled = checked-stretch
+            checked  = checked-stretch
+            text     = 'Stretched' ).                    "#EC NOTEXT
+
+    ENDCASE. "fcode
+
+    IF lx_menu IS BOUND.
+      r_toolbar->track_context_menu(
+           context_menu = lx_menu
+           posx         = posx
+           posy         = posy ).
+    ENDIF.
+
+*
+*    CASE fcode.
+*      WHEN 'PIC_DROPDOWN'.
+*        mr_control_functions->on_dropdown_clicked(
+*                     fcode     = fcode
+*                     r_toolbar = r_toolbar
+*                     posx      = posx
+*                     posy      = posy ).
+*
+*    ENDCASE.
+
+  ENDMETHOD.
+
+
+  METHOD zif_guidrasil_func_receiver~on_function_selected.
+
+    CASE fcode.
+      WHEN c_function_fit.
+        ms_settings-display_mode = cl_gui_picture=>display_mode_fit.
+        apply_settings( ).
+
+      WHEN c_function_normal.
+        ms_settings-display_mode = cl_gui_picture=>display_mode_normal.
+        apply_settings( ).
+
+      WHEN c_function_stretch.
+        ms_settings-display_mode = cl_gui_picture=>display_mode_stretch.
+        apply_settings( ).
+
+      WHEN c_function_normal_centered.
+        ms_settings-display_mode = cl_gui_picture=>display_mode_normal_center.
+        apply_settings( ).
+
+      WHEN c_function_fit_centered.
+        ms_settings-display_mode = cl_gui_picture=>display_mode_fit_center.
+        apply_settings( ).
 
     ENDCASE.
 

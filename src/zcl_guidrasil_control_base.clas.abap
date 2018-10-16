@@ -160,7 +160,6 @@ protected section.
   data GRT_CONTAINER type CWB_CONTAINER .
   data GV_NO_SETTINGS type XFELD .
   data MR_ITERATOR_OBJECTS_FUNC type ref to CL_OBJECT_COLLECTION .
-  data MR_CONTROL_FUNCTIONS type ref to ZCL_GUIDRASIL_FUNCTION .
   data MT_CREATION_CODE type STRING_TABLE .
   data MD_DATA type ref to DATA .
 
@@ -391,10 +390,6 @@ CLASS ZCL_GUIDRASIL_CONTROL_BASE IMPLEMENTATION.
 
 
   METHOD INIT_GUIDRASIL.
-
-    CREATE OBJECT mr_control_functions
-      EXPORTING
-        guidrasil_control = me.
 
   ENDMETHOD.
 

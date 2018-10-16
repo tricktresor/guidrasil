@@ -125,8 +125,14 @@ CLASS ZCL_GUIDRASIL_CONTROL_DIABOX IMPLEMENTATION.
 
   METHOD get_container_name.
 
-    ev_container_name = gr_control->get_name( ).
+    DATA lr_control TYPE REF TO cl_gui_control.
 
+    IF gr_control IS INSTANCE OF cl_gui_control.
+      lr_control ?= gr_control.
+      ev_container_name = lr_control->get_name( ).
+    ELSE.
+      ev_container_name = gv_control_name.
+    ENDIF.
   ENDMETHOD.
 
 

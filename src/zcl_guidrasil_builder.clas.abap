@@ -714,8 +714,6 @@ CLASS ZCL_GUIDRASIL_BUILDER IMPLEMENTATION.
         ct_functions = lt_function.
 
 
-
-
     CALL METHOD ir_wrapper->add_functions
       EXPORTING
         it_function = lt_function
@@ -1225,21 +1223,23 @@ CLASS ZCL_GUIDRASIL_BUILDER IMPLEMENTATION.
     ls_function-text      = ir_control->gv_control_name.
     APPEND ls_function TO ct_functions.
 
-* Funktion für die Änderung des Namens
-    CLEAR ls_function.
-    ls_function-function  = '$ATTRIBUTES'.
-    ls_function-icon      = icon_system_favorites.
-    ls_function-butn_type = cntb_btype_button.
-    ls_function-quickinfo = 'Change Control Attributes'.
-    APPEND ls_function TO ct_functions.
+"==> will now only use "CTRLFUNC
+** Funktion für die Änderung des Namens
+*    CLEAR ls_function.
+*    ls_function-function  = '$ATTRIBUTES'.
+*    ls_function-icon      = icon_system_favorites.
+*    ls_function-butn_type = cntb_btype_button.
+*    ls_function-quickinfo = 'Change Control Attributes'.
+*    APPEND ls_function TO ct_functions.
 
 * Funktion für die control eigenen Änderungen
     CLEAR ls_function.
     ls_function-function  = '$CTRLFUNC'.
-    ls_function-icon      = icon_detail.
+    ls_function-icon      = icon_oo_attribute.
     ls_function-butn_type = cntb_btype_dropdown.
-    ls_function-quickinfo = 'Control attributes'.
+    ls_function-quickinfo = 'Control menu'.
     APPEND ls_function TO ct_functions.
+
 
     zcl_guidrasil_tools=>todo( 'Wenn control keine Funktionen zur Verfügung stellt, darf der Knopf nicht angezeigt werden...' ).
 
@@ -1735,7 +1735,8 @@ CLASS ZCL_GUIDRASIL_BUILDER IMPLEMENTATION.
               ir_control_builder = <control> ).
         ENDIF.
 
-      WHEN '$ATTRIBUTES'.
+*      WHEN '$ATTRIBUTES'
+      WHEN '$CTRLFUNC'.
 
         lr_wrapper ?= r_sender.
         CALL METHOD lr_wrapper->get_children
