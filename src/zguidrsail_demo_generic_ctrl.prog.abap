@@ -44,32 +44,6 @@ CLASS ctrl_demo IMPLEMENTATION.
     DATA(parent) = NEW cl_gui_docking_container( side = side ratio = 20 ).
     DATA(icon) = NEW cl_gui_picture( parent = parent ).
     data(clsnam) = cl_abap_typedescr=>describe_by_object_ref( parent )->get_relative_name( ).
-    data dock2 type ref to cl_gui_control.
-  DATA(xside) = parent->get_docking_side( ).
-   parent->get_ratio( IMPORTING ratio = DATA(xratio) ).
-
-DATA: container TYPE REF TO cl_gui_container,
-      exc_ref TYPE REF TO cx_root.
-
-DATA ptab TYPE abap_parmbind_tab.
-
-ptab = VALUE #(
-                ( name  = 'SIDE'
-                  kind  = cl_abap_objectdescr=>exporting
-                  value = REF #( xside ) )
-                ( name  = 'RATIO'
-                  kind  = cl_abap_objectdescr=>exporting
-                  value = REF #( xratio ) ) ).
-
-TRY.
-    CREATE OBJECT container TYPE (clsnam)
-      PARAMETER-TABLE ptab.
-  CATCH cx_sy_create_object_error INTO exc_ref.
-    MESSAGE exc_ref->get_text( ) TYPE 'I'.
-ENDTRY.
-
-
-
     icon->load_picture_from_sap_icons( icon_message_question ).
     icon->set_display_mode( cl_gui_picture=>display_mode_fit_center ).
     append_control( container = parent control = icon ).

@@ -11,6 +11,8 @@
     <item>/README.md</item>
     <item>/package.json</item>
     <item>/.travis.yml</item>
+    <item>/src/zguidrasil_control_list_cc.tabl.xml</item>
+    <item>/src/zguidrasil_control_list_cc_t.ttyp.xml</item>
    </IGNORE>
   </DATA>
  </asx:values>
