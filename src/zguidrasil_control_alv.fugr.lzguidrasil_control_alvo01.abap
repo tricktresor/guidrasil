@@ -8,6 +8,6 @@ MODULE status_0040 OUTPUT.
   CLEAR gv_okcode.
 
   PERFORM grid_init.
-  perform docu_init.
+  PERFORM docu_init.
 
 ENDMODULE.

@@ -22,6 +22,16 @@ public section.
   class-methods TODO
     importing
       !WAS type STRING optional .
+  class-methods SWITCH_BOOL
+    importing
+      !CURRENT_STATE type ABAP_BOOL
+    returning
+      value(SWITCHED_STATE) type ABAP_BOOL .
+  class-methods SWITCH_INT
+    importing
+      !CURRENT_STATE type INT4
+    returning
+      value(SWITCHED_STATE) type INT4 .
 protected section.
 *"* protected components of class ZCL_GUIDRASIL_TOOLS
 *"* do not include other source files here!!!
@@ -42,6 +52,28 @@ CLASS ZCL_GUIDRASIL_TOOLS IMPLEMENTATION.
   ev_guid = lv_guid.
 
   endmethod.
+
+
+  METHOD switch_bool.
+
+    IF current_state = abap_true.
+      switched_state = abap_false.
+    ELSE.
+      switched_state = abap_true.
+    ENDIF.
+
+  ENDMETHOD.
+
+
+  METHOD switch_int.
+
+    IF current_state = 1.
+      switched_state = 0.
+    ELSE.
+      switched_state = 1.
+    ENDIF.
+
+  ENDMETHOD.
 
 
 METHOD TODO.

@@ -26,6 +26,7 @@ FUNCTION z_guidrasil_control_alv_popup .
 
   cs_settings-dynpro = zguidrasil_setting_gridp.
   gr_grid->get_frontend_fieldcatalog( IMPORTING et_fieldcatalog = cs_settings-fcat ).
+
   gr_grid->get_sort_criteria( IMPORTING et_sort = cs_settings-sort ).
 
   IF gr_docu IS BOUND.

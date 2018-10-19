@@ -61,9 +61,9 @@ ENDCLASS.
 CLASS ZCL_GUIDRASIL_CONTROL_ALV IMPLEMENTATION.
 
 
-  METHOD APPLY_SETTINGS.
+  METHOD apply_settings.
 
-    data ls_layout type lvc_s_layo.
+    DATA ls_layout TYPE lvc_s_layo.
 
     FIELD-SYMBOLS <data> TYPE STANDARD TABLE.
 
@@ -76,11 +76,14 @@ CLASS ZCL_GUIDRASIL_CONTROL_ALV IMPLEMENTATION.
     ENDIF.
 
     TRY .
-        SELECT * FROM (ms_settings-structure_name) INTO TABLE <data> UP TO 40 ROWS.
+        "Try to get some sample data
+        SELECT * FROM (ms_settings-structure_name)
+                 INTO TABLE <data> UP TO 40 ROWS.
       CATCH cx_root INTO DATA(lx_root).
         MESSAGE lx_root TYPE 'S'.
     ENDTRY.
 
+    "Grid must be created anew if structure changed
     CREATE OBJECT mr_alv
       EXPORTING
         i_parent      = mr_parent
@@ -122,7 +125,7 @@ CLASS ZCL_GUIDRASIL_CONTROL_ALV IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD CREATE.
+  METHOD create.
 
     IF iv_name IS INITIAL.
       gv_control_name = zcl_guidrasil_builder=>init_control_name( iv_text = 'GRID' ).
@@ -143,11 +146,13 @@ CLASS ZCL_GUIDRASIL_CONTROL_ALV IMPLEMENTATION.
 
     apply_settings( ).
 
-    DATA lt_events TYPE cntl_simple_events.
-    DATA ls_event  TYPE cntl_simple_event.
-    mr_alv->get_registered_events( IMPORTING events = lt_events ).
+*    DATA lt_events TYPE cntl_simple_events.
+*    DATA ls_event  TYPE cntl_simple_event.
+*    mr_alv->get_registered_events( IMPORTING events = lt_events ).
 
     SET HANDLER handle_double_click FOR mr_alv.
+
+    APPEND 'GRID_DOUBLE_CLICK' TO gt_events.
 
   ENDMETHOD.
 
@@ -242,7 +247,7 @@ CLASS ZCL_GUIDRASIL_CONTROL_ALV IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD RETURN_CREATION_CODE.
+  METHOD return_creation_code.
 
     no_code = abap_false.
 
@@ -253,6 +258,36 @@ CLASS ZCL_GUIDRASIL_CONTROL_ALV IMPLEMENTATION.
 
     lv_string = |SELECT * FROM { ms_settings-structure_name } INTO TABLE gt_data.|.
     APPEND lv_string TO code.
+
+
+
+    APPEND  'CREATE OBJECT mr_$control' TO code.
+    APPEND  '  EXPORTING' TO code.
+    APPEND  '    i_parent      = $parent' TO code.
+    APPEND  '    i_appl_events = space.' TO code.
+    APPEND  'mr_$control->set_table_for_first_display('  TO code.
+    APPEND  |  EXPORTING  i_structure_name = { ms_settings-structure_name }|  TO code.
+    APPEND  '  CHANGING   it_outtab        = <data>' TO code.
+    APPEND  '  EXCEPTIONS OTHERS           = 4. )' TO code.
+
+*    IF ms_settings-fcat IS NOT INITIAL OR
+*       ms_settings-sort IS NOT INITIAL.
+*
+*      IF ms_settings-fcat IS NOT INITIAL.
+*        mr_alv->set_frontend_fieldcatalog( it_fieldcatalog = ms_settings-fcat ).
+*      ENDIF.
+*      IF ms_settings-sort IS NOT INITIAL.
+*        mr_alv->set_sort_criteria( it_sort = ms_settings-sort ).
+*      ENDIF.
+**      mr_alv->refresh_table_display( ).
+*    ENDIF.
+*
+*    mr_alv->get_frontend_layout( IMPORTING es_layout = ls_layout ).
+*    ls_layout-no_toolbar = ms_settings-no_toolbar.
+*    ls_layout-no_headers = ms_settings-no_headers.
+*    ls_layout-smalltitle = ms_settings-smalltitle.
+*    mr_alv->set_frontend_layout( ls_layout ).
+*    mr_alv->refresh_table_display( ).
 
   ENDMETHOD.
 
@@ -343,14 +378,7 @@ CLASS ZCL_GUIDRASIL_CONTROL_ALV IMPLEMENTATION.
 
   METHOD zif_guidrasil_func_receiver~on_function_selected.
 
-    DATA lr_grid   TYPE REF TO cl_gui_alv_grid.
-    DATA lv_text   TYPE gui_text.
-    DATA lx_menu   TYPE REF TO cl_ctmenu.
-    DATA lv_flag   TYPE i.
-    DATA ls_layout TYPE lvc_s_layo.
-
     CHECK r_receiver = me.
-*    lr_grid ?= gr_control.
 
     CASE fcode.
 
@@ -359,27 +387,15 @@ CLASS ZCL_GUIDRASIL_CONTROL_ALV IMPLEMENTATION.
 
 
       WHEN c_function_no_toolbar.
-        IF ms_settings-no_toolbar = space.
-          ms_settings-no_toolbar = abap_true.
-        ELSE.
-          ms_settings-no_toolbar = abap_false.
-        ENDIF.
+        ms_settings-no_toolbar = zcl_guidrasil_tools=>switch_bool( ms_settings-no_toolbar ).
         apply_settings( ).
 
       WHEN c_function_no_headers.
-        IF ms_settings-no_headers = space.
-          ms_settings-no_headers = abap_true.
-        ELSE.
-          ms_settings-no_headers = abap_false.
-        ENDIF.
+        ms_settings-no_headers = zcl_guidrasil_tools=>switch_bool( ms_settings-no_headers ).
         apply_settings( ).
 
       WHEN c_function_smalltitle.
-        IF ms_settings-smalltitle = space.
-          ms_settings-smalltitle = abap_true.
-        ELSE.
-          ms_settings-smalltitle = abap_false.
-        ENDIF.
+        ms_settings-smalltitle = zcl_guidrasil_tools=>switch_bool( ms_settings-smalltitle ).
         apply_settings( ).
     ENDCASE.
 

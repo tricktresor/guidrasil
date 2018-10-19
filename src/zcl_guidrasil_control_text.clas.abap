@@ -376,22 +376,22 @@ CLASS ZCL_GUIDRASIL_CONTROL_TEXT IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD return_creation_code.
+ METHOD return_creation_code.
 
 
-    APPEND 'CREATE OBJECT $control' TO code.
-    APPEND '  EXPORTING' TO code.
-    APPEND '    parent = $parent.' TO code.
+   APPEND 'CREATE OBJECT $control' TO code.
+   APPEND '  EXPORTING' TO code.
+   APPEND '    parent = $parent.' TO code.
 
 
-    APPEND |$control->set_textstream( '{ gs_settings-text }' ).| TO code.
-    APPEND |$control->set_readonly_mode( '{ gs_settings-readonly }' ).| TO code.
-    APPEND |$control->set_toolbar_mode( '{ gs_settings-toolbar }' ).| TO code.
-    APPEND |$control->set_statusbar_mode( '{ gs_settings-statusbar }' ).| TO code.
-    APPEND |$control->set_wordwrap_behavior( wordwrap_mode = '{ gs_settings-wordwrap }' ).| TO code.
+   APPEND |$control->set_textstream( { gs_settings-text } ).| TO code.
+   APPEND |$control->set_readonly_mode( { gs_settings-readonly } ).| TO code.
+   APPEND |$control->set_toolbar_mode( { gs_settings-toolbar } ).| TO code.
+   APPEND |$control->set_statusbar_mode( '{ gs_settings-statusbar } ).| TO code.
+   APPEND |$control->set_wordwrap_behavior( { gs_settings-wordwrap } ).| TO code.
 
 
-  ENDMETHOD.
+ ENDMETHOD.
 
 
   METHOD save_settings.
@@ -513,51 +513,25 @@ CLASS ZCL_GUIDRASIL_CONTROL_TEXT IMPLEMENTATION.
     DATA:
       lr_text TYPE REF TO cl_gui_textedit,
       lv_text TYPE gui_text,
-      lx_menu TYPE REF TO cl_ctmenu,
-      lv_flag TYPE i.
+      lx_menu TYPE REF TO cl_ctmenu.
 
 
     CHECK r_receiver = me.
 
     lr_text ?= gr_control.
 
-
     CASE fcode.
 
       WHEN c_function_readonly.
-
-        IF lr_text->m_readonly_mode = 0.
-          lv_flag = 1.
-        ELSE.
-          lv_flag = 0.
-        ENDIF.
-
-*        lr_text->set_readonly_mode( readonly_mode = lv_flag ).
-        gs_settings-readonly = lv_flag.
+        gs_settings-readonly =  zcl_guidrasil_tools=>switch_int( lr_text->m_readonly_mode ).
         apply_settings( ).
 
       WHEN c_function_toolbar.
-
-        IF lr_text->m_toolbar_mode = 0.
-          lv_flag = 1.
-        ELSE.
-          lv_flag = 0.
-        ENDIF.
-
-*        lr_text->set_toolbar_mode( toolbar_mode = lv_flag ).
-        gs_settings-toolbar = lv_flag.
+        gs_settings-toolbar = zcl_guidrasil_tools=>switch_int( lr_text->m_toolbar_mode ).
         apply_settings( ).
 
       WHEN c_function_statusbar.
-
-        IF lr_text->m_statusbar_mode = 0.
-          lv_flag = 1.
-        ELSE.
-          lv_flag = 0.
-        ENDIF.
-
-*        lr_text->set_statusbar_mode( statusbar_mode = lv_flag ).
-        gs_settings-statusbar = lv_flag.
+        gs_settings-statusbar = zcl_guidrasil_tools=>switch_int( lr_text->m_statusbar_mode ).
         apply_settings( ).
 
     ENDCASE.

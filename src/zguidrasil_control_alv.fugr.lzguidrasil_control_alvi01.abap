@@ -8,8 +8,6 @@ MODULE user_command INPUT.
       SET SCREEN 0. LEAVE SCREEN.
     WHEN 'CANCEL'.
       raise operation_cancelled.
-    WHEN 'GRID_LAYOUT'.
-      PERFORM grid_layout.
   ENDCASE.
 
 
