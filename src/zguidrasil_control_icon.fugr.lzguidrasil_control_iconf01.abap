@@ -62,3 +62,29 @@ FORM init_docu_control.
 
 
 ENDFORM.
+
+FORM init_controls.
+
+*  IF gr_dialogbox IS INITIAL.
+*    CREATE OBJECT gr_dialogbox EXPORTING left = 340 top = 255 height = 200 width = 1210.
+*  ENDIF.
+
+  IF gr_icons_container IS INITIAL.
+    CREATE OBJECT gr_icons_container EXPORTING container_name = 'CC_ICON_SELECTION'.
+  ENDIF.
+
+  IF gr_container IS INITIAL.
+    CREATE OBJECT gr_container
+      EXPORTING
+        container_name = 'CC_ICON'.
+    zcl_guidrasil_tools_icons=>init( gr_icons_container ).
+
+  ENDIF.
+
+  IF gr_picture IS INITIAL.
+    CREATE OBJECT gr_picture
+      EXPORTING
+        parent = gr_container.
+  ENDIF.
+
+ENDFORM.

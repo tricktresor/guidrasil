@@ -11,4 +11,5 @@ DATA gr_picture          TYPE REF TO cl_gui_picture.
 DATA gr_container        TYPE REF TO cl_gui_custom_container.
 DATA gr_docu             TYPE REF TO cl_gui_textedit.
 DATA gr_docu_container   TYPE REF TO cl_gui_custom_container.
-data gr_dialogbox        type REF TO cl_gui_dialogbox_container.
+DATA gr_icons_container  TYPE REF TO cl_gui_custom_container.
+*data gr_dialogbox        type REF TO cl_gui_dialogbox_container.

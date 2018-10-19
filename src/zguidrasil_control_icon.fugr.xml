@@ -63,7 +63,7 @@
       <DESCRIPT>Abfrage Icon</DESCRIPT>
       <TYPE>M</TYPE>
       <NEXTSCREEN>0050</NEXTSCREEN>
-      <LINES>017</LINES>
+      <LINES>035</LINES>
       <COLUMNS>150</COLUMNS>
      </HEADER>
      <CONTAINERS>
@@ -94,6 +94,19 @@
        <C_RESIZE_H>X</C_RESIZE_H>
        <C_LINE_MIN>008</C_LINE_MIN>
        <C_COLN_MIN>010</C_COLN_MIN>
+      </RPY_DYCATT>
+      <RPY_DYCATT>
+       <TYPE>CUST_CTRL</TYPE>
+       <NAME>CC_ICON_SELECTION</NAME>
+       <ELEMENT_OF>SCREEN</ELEMENT_OF>
+       <LINE>019</LINE>
+       <COLUMN>003</COLUMN>
+       <LENGTH>146</LENGTH>
+       <HEIGHT>016</HEIGHT>
+       <C_RESIZE_V>X</C_RESIZE_V>
+       <C_RESIZE_H>X</C_RESIZE_H>
+       <C_LINE_MIN>008</C_LINE_MIN>
+       <C_COLN_MIN>040</C_COLN_MIN>
       </RPY_DYCATT>
      </CONTAINERS>
      <FIELDS>
@@ -209,6 +222,20 @@
        <LENGTH>057</LENGTH>
        <VISLENGTH>057</VISLENGTH>
        <HEIGHT>012</HEIGHT>
+       <FORMAT>CHAR</FORMAT>
+       <REQU_ENTRY>N</REQU_ENTRY>
+      </RPY_DYFATC>
+      <RPY_DYFATC>
+       <CONT_TYPE>SCREEN</CONT_TYPE>
+       <CONT_NAME>SCREEN</CONT_NAME>
+       <TYPE>FRAME</TYPE>
+       <NAME>FRAME_ICON_SELECTION</NAME>
+       <TEXT>Select_icon_by_double_click_________________________________________________________________________________________________________</TEXT>
+       <LINE>018</LINE>
+       <COLUMN>001</COLUMN>
+       <LENGTH>150</LENGTH>
+       <VISLENGTH>150</VISLENGTH>
+       <HEIGHT>018</HEIGHT>
        <FORMAT>CHAR</FORMAT>
        <REQU_ENTRY>N</REQU_ENTRY>
       </RPY_DYFATC>
