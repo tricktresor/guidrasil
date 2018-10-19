@@ -1735,9 +1735,7 @@ CLASS ZCL_GUIDRASIL_BUILDER IMPLEMENTATION.
               ir_control_builder = <control> ).
         ENDIF.
 
-*      WHEN '$ATTRIBUTES'
       WHEN '$CTRLFUNC'.
-
         lr_wrapper ?= r_sender.
         CALL METHOD lr_wrapper->get_children
           IMPORTING

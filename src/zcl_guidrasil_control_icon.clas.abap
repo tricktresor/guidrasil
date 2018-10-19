@@ -329,7 +329,7 @@ ENDMETHOD.
       CHANGING
         cs_settings = ms_settings
       EXCEPTIONS
-        no_changes  = 1.
+        cancelled  = 1.
     IF sy-subrc = 0.
       apply_settings( ).
     ENDIF.

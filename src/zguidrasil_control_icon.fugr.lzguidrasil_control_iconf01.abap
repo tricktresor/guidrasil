@@ -39,7 +39,7 @@ FORM f4_icon .
   IF lv_return_code = 0.
     READ TABLE lt_return_values INTO ls_return_value INDEX 1.
     IF sy-subrc = 0.
-      zguidrasil_setting_icon-icon_name = ls_return_value-fieldval.
+      zguidrasil_setting_icon_p-icon_name = ls_return_value-fieldval.
       PERFORM display_icon.
     ENDIF.
   ENDIF.
@@ -48,7 +48,17 @@ ENDFORM.
 
 FORM display_icon.
 
-  gr_picture->load_picture_from_sap_icons( zcl_guidrasil_control_icon=>get_icon_id( zguidrasil_setting_icon-icon_name ) ).
-  gr_picture->set_display_mode( zguidrasil_setting_icon-display_mode ).
+  gr_picture->load_picture_from_sap_icons( zcl_guidrasil_control_icon=>get_icon_id( zguidrasil_setting_icon_p-icon_name ) ).
+  gr_picture->set_display_mode( zguidrasil_setting_icon_p-display_mode ).
+
+ENDFORM.
+
+FORM init_docu_control.
+
+  IF gr_docu IS INITIAL.
+    CREATE OBJECT gr_docu EXPORTING parent = NEW cl_gui_custom_container( container_name = 'CC_DOCU' ).
+  ENDIF.
+  gr_docu->set_textstream( gs_settings-docu ).
+
 
 ENDFORM.
