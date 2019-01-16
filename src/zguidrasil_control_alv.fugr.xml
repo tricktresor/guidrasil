@@ -66,8 +66,6 @@
        <COLUMN>081</COLUMN>
        <LENGTH>068</LENGTH>
        <HEIGHT>024</HEIGHT>
-       <C_LINE_MIN>001</C_LINE_MIN>
-       <C_COLN_MIN>001</C_COLN_MIN>
       </RPY_DYCATT>
       <RPY_DYCATT>
        <TYPE>CUST_CTRL</TYPE>
@@ -77,8 +75,6 @@
        <COLUMN>002</COLUMN>
        <LENGTH>075</LENGTH>
        <HEIGHT>014</HEIGHT>
-       <C_LINE_MIN>001</C_LINE_MIN>
-       <C_COLN_MIN>001</C_COLN_MIN>
       </RPY_DYCATT>
      </CONTAINERS>
      <FIELDS>
