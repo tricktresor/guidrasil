@@ -4,7 +4,9 @@
   <asx:values>
    <DD02V>
     <TABNAME>ZGUIDRASIL_CONTROL_LIST_CC</TABNAME>
+    <DDLANGUAGE>E</DDLANGUAGE>
     <TABCLASS>INTTAB</TABCLASS>
+    <DDTEXT>guidrasil - list of controls</DDTEXT>
     <EXCLASS>4</EXCLASS>
    </DD02V>
    <DD03P_TABLE>
